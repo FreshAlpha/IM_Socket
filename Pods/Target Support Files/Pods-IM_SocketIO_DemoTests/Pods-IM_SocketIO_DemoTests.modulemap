@@ -1,0 +1,6 @@
+framework module Pods_IM_SocketIO_DemoTests {
+  umbrella header "Pods-IM_SocketIO_DemoTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
