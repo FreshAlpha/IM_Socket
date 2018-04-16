@@ -76,25 +76,4 @@ class ViewController: BaseViewController {
 
 }
 
-extension ViewController: SocketIOManagerDelegate {
-    func reveiveOfflineMsg(_ data: [Any]) {
-        
-    }
-    
-    func reveiveFriendsMsg(_ data: [Any]) {
-        
-    }
-    
-    func reveiveAuthResult(_ data: [Any]) {
-        print("实现代理方法")
-        print(data)
-    }
-    
-    
-    
-    func reveiveData(_ data: SocketAnyEvent) {
-//        let displayString = "服务器响应" + data.event + "/\n\(data.items)"
-//        tv.text = tv.text + displayString
-    }
-    
-}
+

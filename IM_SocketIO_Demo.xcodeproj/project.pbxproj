@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		214EE225208449F70071DD18 /* SocketBusinessManager+Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214EE224208449F70071DD18 /* SocketBusinessManager+Functions.swift */; };
 		215718E22080A48A006F8ACD /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215718D42080A489006F8ACD /* UserInfo.swift */; };
 		215718E32080A48A006F8ACD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215718D62080A48A006F8ACD /* BaseViewController.swift */; };
 		215718E42080A48A006F8ACD /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215718D72080A48A006F8ACD /* MenuViewController.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		122ADE90B0D586F7C8A940CB /* Pods-IM_SocketIO_Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IM_SocketIO_Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-IM_SocketIO_Demo/Pods-IM_SocketIO_Demo.release.xcconfig"; sourceTree = "<group>"; };
+		214EE224208449F70071DD18 /* SocketBusinessManager+Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SocketBusinessManager+Functions.swift"; sourceTree = "<group>"; };
 		215718D42080A489006F8ACD /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		215718D62080A48A006F8ACD /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		215718D72080A48A006F8ACD /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				215718DC2080A48A006F8ACD /* SocketBusinessManager.swift */,
+				214EE224208449F70071DD18 /* SocketBusinessManager+Functions.swift */,
 				215718DD2080A48A006F8ACD /* SocketIOManager.swift */,
 			);
 			path = "Socket连接";
@@ -452,6 +455,7 @@
 				215718E22080A48A006F8ACD /* UserInfo.swift in Sources */,
 				215718EA2080A48A006F8ACD /* NetworkPlugin.swift in Sources */,
 				215718E82080A48A006F8ACD /* SocketBusinessManager.swift in Sources */,
+				214EE225208449F70071DD18 /* SocketBusinessManager+Functions.swift in Sources */,
 				2170EFD1207C9482009A890B /* AppDelegate.swift in Sources */,
 				215718E92080A48A006F8ACD /* SocketIOManager.swift in Sources */,
 				215718EC2080A48A006F8ACD /* UserNetwork.swift in Sources */,
