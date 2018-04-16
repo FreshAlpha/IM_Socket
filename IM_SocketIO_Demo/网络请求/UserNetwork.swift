@@ -13,6 +13,8 @@ enum UserApi {
     case register(userName: String, psd: String)
     case userInfo
     case getSessionID
+    case searchName(keyword: String)
+    case addFriend(friendID: String, msg: String)
 }
 
 extension UserApi: TargetType {
@@ -30,6 +32,10 @@ extension UserApi: TargetType {
             return "/suser/private/user/user/myinfo"
         case .getSessionID:
             return "/suser/sessionid"
+        case .searchName:
+            return "/suser/private/friend/searchname"
+        case .addFriend:
+            return "/suser/private/friend/add"
         }
     }
     
@@ -37,7 +43,7 @@ extension UserApi: TargetType {
         switch self {
         case .login, .register, .userInfo:
             return .post
-        case .getSessionID:
+        case .getSessionID, .searchName, .addFriend:
             return .get
         }
     }
@@ -52,6 +58,9 @@ extension UserApi: TargetType {
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         case .userInfo, .getSessionID:
             return .requestPlain
+        case .searchName, .addFriend:
+            guard let parameters = parameters else {return .requestPlain}
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         }
     }
     
@@ -68,6 +77,12 @@ extension UserApi: TargetType {
             return dic
         case .userInfo, .getSessionID:
             return nil
+        case .searchName(let keyword):
+            let dic: [String: Any] = ["keyword": keyword, "page": 0, "size": 10]
+            return dic
+        case .addFriend(let friendID, let msg):
+            let dic: [String : Any] = ["id": friendID, "msg": msg]
+            return dic
         }
         
     }

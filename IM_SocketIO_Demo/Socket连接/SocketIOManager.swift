@@ -38,20 +38,6 @@ class SocketIOManager: NSObject {
             print("socket连上")
             self.delegate?.connectSuccess()
         }
-        /*
-         socket.onAny { (response) in
-         print("服务端响应")
-         print("----------------------")
-         print(response)
-         print("=======================")
-         guard response.event != "statusChange" else {return}
-         guard response.event != "ping" else {return}
-         guard response.event != "connect" else {return}
-         guard response.event != "pong" else {return}
-         
-         }
-         */
-        
     }
     
     

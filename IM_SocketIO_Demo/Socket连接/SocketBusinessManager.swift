@@ -45,12 +45,12 @@ class SocketBusinessManager: NSObject {
 //MARK: -跟服务器遵循相关文本协议，定制的业务方法
 extension SocketBusinessManager {
     //发送服务端：获取离线消息
-    func fetchOfflineMsg(_ sessionID: String, userID: String) {
-        self.socketMgr.socket.emit(SocketBusinessManager.offlineMsg.emitEvent, [["from": user.userId, "to": "server"]])
+    func fetchOfflineMsg() {
+        self.socketMgr.socket.emit(SocketBusinessManager.offlineMsg.emitEvent, with: [["from": user.userId, "to": "server"]])
     }
     //发送服务端：获取历史消息
-    func fetchHistoryMsg(_ sessionID: String, userID: String) {
-        self.socketMgr.socket.emit(SocketBusinessManager.historyMsg.emitEvent, [["from": user.userId, "to": "server"]])
+    func fetchHistoryMsg() {
+        self.socketMgr.socket.emit(SocketBusinessManager.historyMsg.emitEvent, with: [["from": user.userId, "to": "server"]])
     }
 }
 extension SocketBusinessManager {
@@ -71,7 +71,7 @@ extension SocketBusinessManager: SocketIOManagerSettingDelegate {
     //认证，传sessionid
     func connectSuccess() {
         guard let sessionID = user.sessionID else {return}
-        self.socketMgr.socket.emit(SocketBusinessManager.auth.emitEvent, [["sessionid" : sessionID]])
+        self.socketMgr.socket.emit(SocketBusinessManager.auth.emitEvent, with: [["sessionid" : sessionID]])
     }
 }
 protocol SocketBusinessDelegate: class {
