@@ -18,18 +18,29 @@ extension SocketBusinessManager {
     //认证
     static let auth: SocketFunction = SocketFunction(emitEvent: "auth-c", responseEvent: "auth-s") { (data, mgr) in
         print("认证结果")
-        mgr.delegates.forEach({ (delegator) in
-            delegator.delegate?.reveiveData(data)
-        })
+        
     }
     //离线消息
     static let offlineMsg: SocketFunction = SocketFunction(emitEvent: "caoff", responseEvent: "saoff") { (data, mgr) in
         print("离线消息")
-        print(data)
+        let message = SocketMessageModel(isSend: false, eventName: .offlineMsg)
+        mgr.delegates.forEach({ (delegator) in
+            delegator.delegate?.reveiveData(message)
+        })
     }
     //历史消息
     static let historyMsg: SocketFunction = SocketFunction(emitEvent: "chistory", responseEvent: "shistory") { (data, mgr) in
         print("历史消息")
-        print(data)
+        mgr.delegates.forEach({ (delegator) in
+            let message = SocketMessageModel(isSend: false, eventName: .historyMsg)
+            delegator.delegate?.reveiveData(message)
+        })
+    }
+    static let friendInvitation: SocketFunction = SocketFunction(emitEvent: "", responseEvent: "addfriend") { (data, mgr) in
+        print("别人请求添加你为好友")
+        mgr.delegates.forEach({ (delegator) in
+            
+            delegator.delegate?.reveiveFriendInvation(data)
+        })
     }
 }

@@ -40,7 +40,6 @@ class SocketBusinessManager: NSObject {
     func addDelegate(delegate: SocketBusinessDelegate) {
         self.delegates.append(WeakSocketDelegate(delegate: delegate))//防止数组直接放delegate，强引用外部对象。
     }
-    
 }
 //MARK: -跟服务器遵循相关文本协议，定制的业务方法
 extension SocketBusinessManager {
@@ -59,11 +58,11 @@ extension SocketBusinessManager {
         register(SocketBusinessManager.auth)
         register(SocketBusinessManager.offlineMsg)
         register(SocketBusinessManager.historyMsg)
+        register(SocketBusinessManager.friendInvitation)
     }
     private func register(_ function: SocketFunction) {
         self.socketMgr.socket.on(function.responseEvent) { (data: [Any], ack: SocketAckEmitter) in
             function.handler(data, self)
-            
         }
     }
 }
@@ -76,5 +75,11 @@ extension SocketBusinessManager: SocketIOManagerSettingDelegate {
 }
 protocol SocketBusinessDelegate: class {
     //MARK: -目前只写一个方法，通过model的messageType区分不同消息，后续如果有扩展，再添加其它方法
-    func reveiveData(_ data: [Any])
+    func reveiveData(_ data: SocketMessageModel)
+    func reveiveFriendInvation(_ data: [Any])
+}
+extension SocketBusinessDelegate {
+    func reveiveFriendInvation(_ data: [Any]) {
+        
+    }
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		214EE225208449F70071DD18 /* SocketBusinessManager+Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214EE224208449F70071DD18 /* SocketBusinessManager+Functions.swift */; };
+		214EE22720849B650071DD18 /* SocketMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 214EE22620849B650071DD18 /* SocketMessageModel.swift */; };
 		215718E22080A48A006F8ACD /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215718D42080A489006F8ACD /* UserInfo.swift */; };
 		215718E32080A48A006F8ACD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215718D62080A48A006F8ACD /* BaseViewController.swift */; };
 		215718E42080A48A006F8ACD /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215718D72080A48A006F8ACD /* MenuViewController.swift */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		122ADE90B0D586F7C8A940CB /* Pods-IM_SocketIO_Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IM_SocketIO_Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-IM_SocketIO_Demo/Pods-IM_SocketIO_Demo.release.xcconfig"; sourceTree = "<group>"; };
 		214EE224208449F70071DD18 /* SocketBusinessManager+Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SocketBusinessManager+Functions.swift"; sourceTree = "<group>"; };
+		214EE22620849B650071DD18 /* SocketMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketMessageModel.swift; sourceTree = "<group>"; };
 		215718D42080A489006F8ACD /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		215718D62080A48A006F8ACD /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		215718D72080A48A006F8ACD /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				215718DC2080A48A006F8ACD /* SocketBusinessManager.swift */,
 				214EE224208449F70071DD18 /* SocketBusinessManager+Functions.swift */,
 				215718DD2080A48A006F8ACD /* SocketIOManager.swift */,
+				214EE22620849B650071DD18 /* SocketMessageModel.swift */,
 			);
 			path = "Socket连接";
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				214EE22720849B650071DD18 /* SocketMessageModel.swift in Sources */,
 				215718E72080A48A006F8ACD /* ViewController.swift in Sources */,
 				215718E22080A48A006F8ACD /* UserInfo.swift in Sources */,
 				215718EA2080A48A006F8ACD /* NetworkPlugin.swift in Sources */,

@@ -59,6 +59,9 @@
                                 <state key="normal" title="注册">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <segue destination="dRz-ol-qUa" kind="show" id="125-3g-KxI"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入用户名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XO3-qX-uI6">
                                 <rect key="frame" x="30" y="145" width="315" height="30"/>
@@ -118,7 +121,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入用户名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Tk-eD-JjQ">
-                                <rect key="frame" x="30" y="60" width="315" height="30"/>
+                                <rect key="frame" x="30" y="104" width="315" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="CIW-ci-JeX"/>
                                 </constraints>
@@ -127,7 +130,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Pv-CV-EoB">
-                                <rect key="frame" x="30" y="118" width="315" height="30"/>
+                                <rect key="frame" x="30" y="162" width="315" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="Qna-zE-aCT"/>
                                     <constraint firstAttribute="height" constant="30" id="cMu-4n-xUA"/>
@@ -137,7 +140,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请确认密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tM1-aI-8wE">
-                                <rect key="frame" x="30" y="175" width="315" height="30"/>
+                                <rect key="frame" x="30" y="219" width="315" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="Jr5-5Q-yxD"/>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="30" id="dz9-CG-XK4"/>
@@ -148,7 +151,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bc2-tB-i1Y">
-                                <rect key="frame" x="50" y="250" width="275" height="44"/>
+                                <rect key="frame" x="50" y="294" width="275" height="44"/>
                                 <color key="backgroundColor" red="1" green="0.2156862745" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="bx6-aw-9Fi"/>

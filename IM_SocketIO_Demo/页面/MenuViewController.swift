@@ -33,7 +33,7 @@ class MenuViewController: BaseViewController {
         case 1003:
             break
         case 1004:
-            requestForAddFriend(friendID: "5acdbddd15256f119f596567")//搜索好友请求失败，直接添加好友
+            requestForAddFriend(friendID: "5acdbddd15256f119f596567")//搜索好友请求失败，直接添加好友（175的账号）
 //            requestSearchFriends()
         case 1005:
             break
@@ -73,7 +73,19 @@ class MenuViewController: BaseViewController {
     
 }
 extension MenuViewController: SocketBusinessDelegate {
-    func reveiveData(_ data: [Any]) {
-        
+    func reveiveFriendInvation(_ data: [Any]) {
+        print("来自好友申请")
+        print(data)
+    }
+    
+    func reveiveData(_ data: SocketMessageModel) {
+        switch data.eventName {
+        case .friendInvation:
+            print("有个好友申请")
+        case .offlineMsg:
+            print("离线消息")
+        case .historyMsg:
+            print("历史消息")
+        }
     }
 }
