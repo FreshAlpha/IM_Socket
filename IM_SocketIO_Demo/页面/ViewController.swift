@@ -14,58 +14,37 @@ class ViewController: BaseViewController {
     
     @IBOutlet weak var usernameTF: UITextField!
     @IBOutlet weak var psdTF: UITextField!
-    private let userInfo = UserInfo.shared()
+    
     private let provider = MoyaProvider<UserApi>(plugins: [NetworkPlugin()])
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tapToDismissKeyBoard))
+        self.view.addGestureRecognizer(tap)
     }
-
+    @objc func tapToDismissKeyBoard() {
+        for aView in self.view.subviews {
+            if let tf = aView as? UITextField {
+                tf.resignFirstResponder()
+            }
+        }
+    }
     //登录
     @IBAction func login(_ sender: Any) {
-        guard let username = usernameTF.text, let psd = psdTF.text else {
+        guard let username = usernameTF.text, let pwd = psdTF.text else {
             return
         }
-        provider.request(.login(userName: username, psd: psd)) { (result) in
-            guard case .success(let response) = result else {return}
-            guard response.serverCodeType == .success else {return}
-            print("登录成功")
-            print(response.responseJSON as Any)
-            self.requestUserInfo()
-            self.getSessionID()
+        IMManager.shared().login(username: username, pwd: pwd) { (success) in
+            if success {
+                self.showMenu()
+            }
         }
     }
-    private func requestUserInfo() {
-        provider.request(.userInfo, completion: { (result) in
-            guard case .success(let response) = result else {return}
-            guard let responseJSON = response.responseJSON else {return}
-//            guard response.serverCodeType == .success else {return}
-            print("拿到用户信息")
-            print(responseJSON)
-            self.handleUserInfo(responseJSON)
-        })
-    }
-    private func getSessionID() {
-        provider.request(.getSessionID) { (result) in
-            guard case .success(let response) = result else {return}
-            guard response.serverCodeType == .success else {return}
-            print("拿到sessionID")
-            print(response.responseJSON as Any)
-            self.userInfo.sessionID = response.responseJSON?["id"].string
-            SocketBusinessManager.shared().connect()
-            self.pushToMenu()
-        }
-    }
-    private func pushToMenu() {
+    private func showMenu() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let menuVC = MenuViewController()
-        self.navigationController?.pushViewController(menuVC, animated: true)
-    }
-    private func handleUserInfo(_ responseJSON: JSON) {
-        userInfo.name = responseJSON["name"].stringValue
-        userInfo.email = responseJSON["email"].stringValue
-        userInfo.userId = responseJSON["_id"].stringValue
+        appDelegate.window?.rootViewController = UINavigationController(rootViewController: menuVC)
     }
     
     override func didReceiveMemoryWarning() {

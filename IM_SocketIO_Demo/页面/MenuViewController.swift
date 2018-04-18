@@ -9,8 +9,8 @@
 import UIKit
 import Moya
 class MenuViewController: BaseViewController {
-    let provider = MoyaProvider<UserApi>(plugins: [NetworkPlugin()])
-    @IBOutlet weak var searchTF: UITextField!
+    
+    @IBOutlet weak var friendsList: UIButton!
     private let socketMgr = SocketBusinessManager.shared()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +29,12 @@ class MenuViewController: BaseViewController {
         case 1001:
             socketMgr.fetchOfflineMsg()
         case 1002:
-            socketMgr.fetchHistoryMsg()
+            self.pushToFriendList()
         case 1003:
-            break
+            socketMgr.fetchHistoryMsg()
         case 1004:
-            requestForAddFriend(friendID: "5acdbddd15256f119f596567")//搜索好友请求失败，直接添加好友（175的账号）
+            self.pushToFriendInvationList()
+            IMManager.shared().addFriend(by: "5acdbddd15256f119f596567")//搜索好友请求失败，直接添加好友（175的账号）
 //            requestSearchFriends()
         case 1005:
             break
@@ -46,39 +47,28 @@ class MenuViewController: BaseViewController {
         }
         
     }
-    private func requestSearchFriends() {
-        guard let searchName = searchTF.text else {return}
-        provider.request(.searchName(keyword: searchName)) { (result) in
-            guard case .success(let response) = result, response.serverCodeType == .success else {
-                print("查找失败")
-                return
-                
-            }
-            print("查找成功")
-            if let friendID = response.responseJSON?.array?.first?.dictionary?["id"]?.string {
-                self.requestForAddFriend(friendID: friendID)
-            }
-            
-        }
+    private func pushToFriendList() {
+        let friendList = FriendsListVC()
+        self.navigationController?.pushViewController(friendList, animated: true)
     }
-    private func requestForAddFriend(friendID: String) {
-        provider.request(.addFriend(friendID: friendID, msg: "hello，来自iOS的朋友")) { (result) in
-            guard case .success(let response) = result, response.serverCodeType == .success else {
-                print("添加朋友申请失败")
-                return
-            }
-            print("添加好友申请成功")
-        }
+    private func pushToFriendInvationList() {
+        let friendsInvationVC = FriendsMessageVC()
+        self.navigationController?.pushViewController(friendsInvationVC, animated: true)
     }
+    
     
 }
 extension MenuViewController: SocketBusinessDelegate {
-    func reveiveFriendInvation(_ data: [Any]) {
+    func receiveFriendInvation(_ data: SocketSystemMessage) {
         print("来自好友申请")
         print(data)
     }
+    func receiveFriendApprove(_ data: SocketSystemMessage) {
+        print("好友同意添加请求")
+        print(data)
+    }
     
-    func reveiveData(_ data: SocketMessageModel) {
+    func receiveData(_ data: SocketMessageModel) {
         switch data.eventName {
         case .friendInvation:
             print("有个好友申请")

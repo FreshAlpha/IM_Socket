@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MenuViewController" customModule="IM_SocketIO_Demo" customModuleProvider="target">
             <connections>
-                <outlet property="searchTF" destination="swe-0k-rnW" id="CdU-MI-T4f"/>
+                <outlet property="friendsList" destination="2lR-83-hoV" id="XbI-t9-xhd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KmE-W5-aVd">
-                    <rect key="frame" x="0.0" y="100" width="375" height="467"/>
+                    <rect key="frame" x="0.0" y="64" width="375" height="553"/>
                     <subviews>
                         <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzr-qf-WdL">
                             <rect key="frame" x="137.5" y="0.0" width="100" height="30"/>
@@ -37,7 +37,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2lR-83-hoV">
-                            <rect key="frame" x="137.5" y="73" width="100" height="30"/>
+                            <rect key="frame" x="137.5" y="87" width="100" height="30"/>
                             <color key="backgroundColor" red="0.18823529410000001" green="0.24313725489999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="好友">
                                 <color key="titleColor" red="0.57647058819999997" green="0.60392156860000001" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -47,7 +47,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YpP-4H-hYg">
-                            <rect key="frame" x="137.5" y="145.5" width="100" height="30"/>
+                            <rect key="frame" x="137.5" y="174.5" width="100" height="30"/>
                             <color key="backgroundColor" red="0.18823529410000001" green="0.24313725489999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="群聊">
                                 <color key="titleColor" red="0.57647058819999997" green="0.60392156860000001" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -57,7 +57,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="1004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Lu-Qh-g9h">
-                            <rect key="frame" x="137.5" y="218.5" width="100" height="30"/>
+                            <rect key="frame" x="137.5" y="261.5" width="100" height="30"/>
                             <color key="backgroundColor" red="0.18823529410000001" green="0.24313725489999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="添加好友">
                                 <color key="titleColor" red="0.57647058819999997" green="0.60392156860000001" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -67,7 +67,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="1005" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ys-5h-2jb">
-                            <rect key="frame" x="137.5" y="291.5" width="100" height="30"/>
+                            <rect key="frame" x="137.5" y="348.5" width="100" height="30"/>
                             <color key="backgroundColor" red="0.18823529410000001" green="0.24313725489999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="添加群">
                                 <color key="titleColor" red="0.57647058819999997" green="0.60392156860000001" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -77,7 +77,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="1006" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IK5-Cx-Oo0">
-                            <rect key="frame" x="137.5" y="364" width="100" height="30"/>
+                            <rect key="frame" x="137.5" y="436" width="100" height="30"/>
                             <color key="backgroundColor" red="0.18823529410000001" green="0.24313725489999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="创建群">
                                 <color key="titleColor" red="0.57647058819999997" green="0.60392156860000001" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -87,7 +87,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" tag="1007" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79B-RV-siG">
-                            <rect key="frame" x="137.5" y="437" width="100" height="30"/>
+                            <rect key="frame" x="137.5" y="523" width="100" height="30"/>
                             <color key="backgroundColor" red="0.18823529410000001" green="0.24313725489999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="删除好友">
                                 <color key="titleColor" red="0.57647058819999997" green="0.60392156860000001" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -106,21 +106,12 @@
                         <constraint firstItem="1Lu-Qh-g9h" firstAttribute="width" secondItem="zzr-qf-WdL" secondAttribute="width" id="yGU-fC-wK0"/>
                     </constraints>
                 </stackView>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入好友关键字（精确输入）" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="swe-0k-rnW">
-                    <rect key="frame" x="15" y="60" width="345" height="30"/>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="KmE-W5-aVd" secondAttribute="bottom" constant="100" id="1qp-yX-AVh"/>
-                <constraint firstItem="KmE-W5-aVd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="4f5-09-nyd"/>
+                <constraint firstAttribute="bottom" secondItem="KmE-W5-aVd" secondAttribute="bottom" constant="50" id="1qp-yX-AVh"/>
+                <constraint firstItem="KmE-W5-aVd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="4f5-09-nyd"/>
                 <constraint firstItem="KmE-W5-aVd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GBS-p3-REl"/>
-                <constraint firstItem="swe-0k-rnW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="LKh-ee-u9P"/>
-                <constraint firstItem="KmE-W5-aVd" firstAttribute="top" secondItem="swe-0k-rnW" secondAttribute="bottom" constant="10" id="OIM-XC-F9C"/>
-                <constraint firstAttribute="trailing" secondItem="swe-0k-rnW" secondAttribute="trailing" constant="15" id="e5c-Ub-1At"/>
                 <constraint firstAttribute="trailing" secondItem="KmE-W5-aVd" secondAttribute="trailing" id="vlB-io-r7s"/>
             </constraints>
             <point key="canvasLocation" x="24.5" y="51.5"/>

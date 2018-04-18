@@ -18,6 +18,8 @@ class SocketBusinessManager: NSObject {
     private let socketMgr = SocketIOManager.shared()
     private let user = UserInfo.shared()
     var delegates = [WeakSocketDelegate]()
+    public var friendInvations = [SocketSystemMessage]()
+    var chatMessages = [MessageModel]()
     static let singleTon = SocketBusinessManager()
     class func shared() -> SocketBusinessManager {
         return singleTon
@@ -40,6 +42,21 @@ class SocketBusinessManager: NSObject {
     func addDelegate(delegate: SocketBusinessDelegate) {
         self.delegates.append(WeakSocketDelegate(delegate: delegate))//防止数组直接放delegate，强引用外部对象。
     }
+    func delegateInvation(by friendID: String) {
+        objc_sync_enter(self)
+        var deleteIndex: Int?
+        for (index, msg) in friendInvations.enumerated() {
+            if friendID == msg.fromID {
+                deleteIndex = index
+            }
+            break
+        }
+        if let deleteIdx = deleteIndex {
+            friendInvations.remove(at: deleteIdx)
+        }
+        objc_sync_exit(self)
+    }
+    
 }
 //MARK: -跟服务器遵循相关文本协议，定制的业务方法
 extension SocketBusinessManager {
@@ -51,6 +68,10 @@ extension SocketBusinessManager {
     func fetchHistoryMsg() {
         self.socketMgr.socket.emit(SocketBusinessManager.historyMsg.emitEvent, with: [["from": user.userId, "to": "server"]])
     }
+    //发送消息
+    func sendMessage(model: MessageModel) {
+        self.socketMgr.socket.emit(SocketBusinessManager.sendMessage.emitEvent, with: [model.mapDic()])
+    }
 }
 extension SocketBusinessManager {
     //注册接收消息方法
@@ -59,6 +80,8 @@ extension SocketBusinessManager {
         register(SocketBusinessManager.offlineMsg)
         register(SocketBusinessManager.historyMsg)
         register(SocketBusinessManager.friendInvitation)
+        register(SocketBusinessManager.friendApproved)
+        register(SocketBusinessManager.sendMessage)
     }
     private func register(_ function: SocketFunction) {
         self.socketMgr.socket.on(function.responseEvent) { (data: [Any], ack: SocketAckEmitter) in
@@ -75,11 +98,34 @@ extension SocketBusinessManager: SocketIOManagerSettingDelegate {
 }
 protocol SocketBusinessDelegate: class {
     //MARK: -目前只写一个方法，通过model的messageType区分不同消息，后续如果有扩展，再添加其它方法
-    func reveiveData(_ data: SocketMessageModel)
-    func reveiveFriendInvation(_ data: [Any])
+    func receiveData(_ data: SocketMessageModel)
+    func receiveFriendInvation(_ data: SocketSystemMessage)
+    func receiveFriendApprove(_ data: SocketSystemMessage)
+    func receiveMessage(_ data: SocketSystemMessage)
+    func receiveCommentChatMessage(_ message: MessageModel)
 }
 extension SocketBusinessDelegate {
-    func reveiveFriendInvation(_ data: [Any]) {
+    func receiveData(_ data: SocketMessageModel) {
         
+    }
+    func receiveFriendInvation(_ data: SocketSystemMessage) {
+         
+    }
+    func receiveFriendApprove(_ data: SocketSystemMessage) {
+        
+    }
+    func receiveMessage(_ data: SocketSystemMessage){
+        
+    }
+    func receiveCommentChatMessage(_ message: MessageModel) {
+        
+    }
+}
+extension SocketBusinessManager {
+    //与某个朋友的对话
+    func chatMessages(with friendID: String)-> [MessageModel] {
+       return self.chatMessages.filter { (model) -> Bool in
+            return model.from == friendID || model.to == friendID
+        }
     }
 }

@@ -23,11 +23,7 @@ class RegisterVC: BaseViewController {
             return
         }
         guard let psd = psdTF.text, let rePsd = psdReTF.text, psd == rePsd else {return}
-        provider.request(.register(userName: username, psd: psd)) { (result) in
-            guard case .success(let response) = result, response.serverCodeType == .success else {return}
-            print("注册成功")
-            print(response.responseJSON as Any)
-        }
+        
         
     }
     override func didReceiveMemoryWarning() {

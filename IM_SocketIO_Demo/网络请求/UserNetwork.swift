@@ -15,6 +15,8 @@ enum UserApi {
     case getSessionID
     case searchName(keyword: String)
     case addFriend(friendID: String, msg: String)
+    case approveFriend(friendID: String)
+    case friendList
 }
 
 extension UserApi: TargetType {
@@ -36,12 +38,16 @@ extension UserApi: TargetType {
             return "/suser/private/friend/searchname"
         case .addFriend:
             return "/suser/private/friend/add"
+        case .approveFriend:
+            return "/suser/private/friend/addcheck"
+        case .friendList:
+            return "/suser/private/friend/getlist"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .login, .register, .userInfo:
+        case .login, .register, .userInfo, .approveFriend, .friendList:
             return .post
         case .getSessionID, .searchName, .addFriend:
             return .get
@@ -53,10 +59,10 @@ extension UserApi: TargetType {
     }
     var task: Task {
         switch self {
-        case .login, .register:
+        case .login, .register, .approveFriend:
             guard let parameters = parameters else {return .requestPlain}
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
-        case .userInfo, .getSessionID:
+        case .userInfo, .getSessionID, .friendList:
             return .requestPlain
         case .searchName, .addFriend:
             guard let parameters = parameters else {return .requestPlain}
@@ -75,13 +81,16 @@ extension UserApi: TargetType {
         case .register(let userName, let psd):
             let dic: [String : Any] = ["name": userName, "pwd": psd, "email": userName, "age": 1, "sex": 1]
             return dic
-        case .userInfo, .getSessionID:
+        case .userInfo, .getSessionID, .friendList:
             return nil
         case .searchName(let keyword):
             let dic: [String: Any] = ["keyword": keyword, "page": 0, "size": 10]
             return dic
         case .addFriend(let friendID, let msg):
             let dic: [String : Any] = ["id": friendID, "msg": msg]
+            return dic
+        case .approveFriend(let friendID):
+            let dic: [String : Any] = ["fid": friendID]
             return dic
         }
         

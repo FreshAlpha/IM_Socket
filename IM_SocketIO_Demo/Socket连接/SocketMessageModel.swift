@@ -17,3 +17,10 @@ enum MessageType {
     case offlineMsg
     case historyMsg
 }
+//系统消息Model
+struct SocketSystemMessage {
+    let fromID: String
+    let toID: String //一般为用户自己
+    let eventType: String
+    let msg: String
+}
