@@ -11,6 +11,7 @@ import UIKit
 class ChatVC: BaseViewController {
     @IBOutlet weak var inputTF: UITextField!
     @IBOutlet weak var mainTable: UITableView!
+    @IBOutlet weak var inputBottomConstaint: NSLayoutConstraint!
     private let friendID: String
     private let socketMgr = SocketBusinessManager.shared()
     private var chatArray = [MessageModel]()
@@ -29,6 +30,8 @@ class ChatVC: BaseViewController {
         mainTable.register(UINib(nibName: "ChatCell", bundle: nil), forCellReuseIdentifier: "myChat")
         mainTable.register(UINib(nibName: "OtherChatCell", bundle: nil), forCellReuseIdentifier: "OtherChat")
         socketMgr.addDelegate(delegate: self)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.showKeyBoard(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.hideKeyboard(_:)), name: .UIKeyboardWillHide, object: nil)
                 // Do any additional setup after loading the view.
     }
 
@@ -42,6 +45,19 @@ class ChatVC: BaseViewController {
         }
         let msgModel = MessageModel(from: UserInfo.shared().userId, to: friendID, identifier: "myInfo", msg: message)
         socketMgr.sendMessage(model: msgModel)
+        self.inputTF.text = nil
+    }
+    @objc private func showKeyBoard(_ noti: NSNotification) {
+        guard let rectValue = noti.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue else {return}
+        let height = rectValue.cgRectValue.size.height
+        self.inputBottomConstaint.constant = height
+        
+    }
+    @objc private func hideKeyboard(_ noti: NSNotification) {
+        guard noti.userInfo != nil else {
+            return
+        }
+        self.inputBottomConstaint.constant = 40
     }
 
 }
@@ -66,10 +82,11 @@ extension ChatVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 10
+        return 100
     }
 }
 extension ChatVC: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         self.sendMessage()
@@ -80,5 +97,9 @@ extension ChatVC: SocketBusinessDelegate {
     func receiveCommentChatMessage(_ message: MessageModel) {
         chatArray.append(message)
         self.mainTable.reloadData()
+        guard chatArray.count > 0 else {
+            return
+        }
+        self.mainTable.scrollToRow(at: IndexPath(item: chatArray.count - 1, section: 0), at: .top, animated: true)
     }
 }

@@ -23,8 +23,8 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="V0a-Qf-L8W"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.57647058819999997" green="0.60392156860000001" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="friendHeader" translatesAutoresizingMaskIntoConstraints="NO" id="Gcs-Kz-chC">
@@ -34,12 +34,13 @@
                             <constraint firstAttribute="height" constant="30" id="eZf-1u-Pzf"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfj-Lx-7GX">
-                        <rect key="frame" x="42" y="10" width="228" height="71.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfj-Lx-7GX">
+                        <rect key="frame" x="42" y="21" width="228" height="60.5"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="Pmd-fg-g4w"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -50,7 +51,7 @@
                     <constraint firstItem="gfj-Lx-7GX" firstAttribute="leading" secondItem="Gcs-Kz-chC" secondAttribute="trailing" constant="5" id="5va-tm-XlT"/>
                     <constraint firstAttribute="bottom" secondItem="gfj-Lx-7GX" secondAttribute="bottom" constant="10" id="QoA-i4-fNf"/>
                     <constraint firstAttribute="trailing" secondItem="RLG-4K-gjB" secondAttribute="trailing" constant="5" id="aA3-eu-eYQ"/>
-                    <constraint firstItem="gfj-Lx-7GX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="bR1-oT-ca4"/>
+                    <constraint firstItem="gfj-Lx-7GX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="21" id="bR1-oT-ca4"/>
                     <constraint firstItem="RLG-4K-gjB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="bfi-BN-YjO"/>
                     <constraint firstItem="RLG-4K-gjB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="7" id="dHk-nW-ClK"/>
                     <constraint firstAttribute="trailing" secondItem="gfj-Lx-7GX" secondAttribute="trailing" constant="50" id="uLF-WU-kd6"/>
