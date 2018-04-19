@@ -13,7 +13,8 @@ import SocketIO
 class SocketIOManager: NSObject {
     
     private static let sharedInstance = SocketIOManager()
-    private var manager = SocketManager(socketURL: URL(string: "http://123.206.136.17:8080")!, config: [.log(true), .forcePolling(true)])
+    
+    private var manager = SocketManager(socketURL: URL(string: "http://123.206.136.17:8080")!, config: [.log(true)])
     var socket: SocketIOClient!
     weak var delegate: SocketIOManagerSettingDelegate?
     private override init() {

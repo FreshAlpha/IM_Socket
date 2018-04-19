@@ -78,6 +78,9 @@ extension SocketBusinessManager {
     //互发消息
     static let sendMessage: SocketFunction = SocketFunction(emitEvent: "cfmsg", responseEvent: "sfmsg") { (data, mgr) in
         print("其他用户发到自己的信息,或者上次发送的消息的回执")
+        if let message = data.first as? [String: Any] {
+            print("返回的消息是字典\(message)")
+        }
         guard let responseJson = JSON(data).array?.first else {return}
         let model = MessageModel(with: JSON(responseJson))
         objc_sync_enter(self)
