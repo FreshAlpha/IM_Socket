@@ -18,6 +18,8 @@ enum UserApi {
     case approveFriend(friendID: String)
     case friendList
     case createGroup(name: String, remark: String)
+    case searchGroup(keyword: String)
+    case joinGroup(groupID: String, msg: String)
 }
 
 extension UserApi: TargetType {
@@ -45,12 +47,16 @@ extension UserApi: TargetType {
             return "/suser/private/friend/getlist"
         case .createGroup:
             return "/suser/private/group/creategroup"
+        case .searchGroup:
+            return "/suser/private/group/searchgroupbyname"
+        case .joinGroup:
+            return "/suser/private/group/applygroup"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .login, .register, .userInfo, .approveFriend, .friendList, .createGroup:
+        case .login, .register, .userInfo, .approveFriend, .friendList, .createGroup, .searchGroup, .joinGroup:
             return .post
         case .getSessionID, .searchName, .addFriend:
             return .get
@@ -62,7 +68,7 @@ extension UserApi: TargetType {
     }
     var task: Task {
         switch self {
-        case .login, .register, .approveFriend, .createGroup:
+        case .login, .register, .approveFriend, .createGroup, .searchGroup, .joinGroup:
             guard let parameters = parameters else {return .requestPlain}
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         case .userInfo, .getSessionID, .friendList:
@@ -77,29 +83,28 @@ extension UserApi: TargetType {
         return ["Content-type": "application/json"]
     }
     var parameters: [String : Any]? {
+        let dic: [String: Any]?
         switch self {
         case .login(let userName, let psd):
-            let dic = ["email": userName, "pwd": psd]
-            return dic
+            dic = ["email": userName, "pwd": psd]
         case .register(let userName, let psd):
-            let dic: [String : Any] = ["name": userName, "pwd": psd, "email": userName, "age": 1, "sex": 1]
-            return dic
+            dic = ["name": userName, "pwd": psd, "email": userName, "age": 1, "sex": 1]
         case .userInfo, .getSessionID, .friendList:
-            return nil
+            dic = nil
         case .searchName(let keyword):
-            let dic: [String: Any] = ["keyword": keyword, "page": 0, "size": 10]
-            return dic
+            dic = ["keyword": keyword, "page": 0, "size": 10]
         case .addFriend(let friendID, let msg):
-            let dic: [String : Any] = ["id": friendID, "msg": msg]
-            return dic
+            dic = ["id": friendID, "msg": msg]
         case .approveFriend(let friendID):
-            let dic: [String : Any] = ["fid": friendID]
-            return dic
+            dic = ["fid": friendID]
         case .createGroup(let name, let remark):
-            let dic: [String: Any] = ["name": name, "remark": remark]
-            return dic
+            dic = ["name": name, "remark": remark]
+        case .searchGroup(let keyword):
+            dic = ["keyword": keyword, "page": 0, "size": 10]
+        case .joinGroup(let groupID, let msg):
+            dic = ["id": UserInfo.shared().userId, "gid": groupID, "msg": msg]
         }
-        
+        return dic
     }
     
 }
