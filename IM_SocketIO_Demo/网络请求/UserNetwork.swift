@@ -17,6 +17,7 @@ enum UserApi {
     case addFriend(friendID: String, msg: String)
     case approveFriend(friendID: String)
     case friendList
+    case createGroup(name: String, remark: String)
 }
 
 extension UserApi: TargetType {
@@ -42,12 +43,14 @@ extension UserApi: TargetType {
             return "/suser/private/friend/addcheck"
         case .friendList:
             return "/suser/private/friend/getlist"
+        case .createGroup:
+            return "/suser/private/group/creategroup"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .login, .register, .userInfo, .approveFriend, .friendList:
+        case .login, .register, .userInfo, .approveFriend, .friendList, .createGroup:
             return .post
         case .getSessionID, .searchName, .addFriend:
             return .get
@@ -59,7 +62,7 @@ extension UserApi: TargetType {
     }
     var task: Task {
         switch self {
-        case .login, .register, .approveFriend:
+        case .login, .register, .approveFriend, .createGroup:
             guard let parameters = parameters else {return .requestPlain}
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         case .userInfo, .getSessionID, .friendList:
@@ -91,6 +94,9 @@ extension UserApi: TargetType {
             return dic
         case .approveFriend(let friendID):
             let dic: [String : Any] = ["fid": friendID]
+            return dic
+        case .createGroup(let name, let remark):
+            let dic: [String: Any] = ["name": name, "remark": remark]
             return dic
         }
         

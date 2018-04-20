@@ -93,4 +93,10 @@ extension SocketBusinessManager {
             delegator.delegate?.receiveCommentChatMessage(model)
         })
     }
+    static let friendOnline: SocketFunction = SocketFunction(emitEvent: "", responseEvent: "sfonline") { (data, mgr) in
+        print("好友上线消息")
+    }
+    static let friendOffline: SocketFunction = SocketFunction(emitEvent: "", responseEvent: "sfoffline") { (data, mgr) in
+        print("好友下线消息")
+    }
 }
