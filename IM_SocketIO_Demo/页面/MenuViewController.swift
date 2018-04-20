@@ -31,7 +31,7 @@ class MenuViewController: BaseViewController {
         case 1002:
             self.pushToFriendList()
         case 1003:
-            socketMgr.fetchHistoryMsg()
+            break
         case 1004:
             self.pushToFriendInvationList()
             IMManager.shared().addFriend(by: "5acdbddd15256f119f596567")//搜索好友请求失败，直接添加好友（175的账号）

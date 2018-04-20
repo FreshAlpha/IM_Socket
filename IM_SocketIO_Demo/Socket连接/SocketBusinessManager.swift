@@ -64,13 +64,21 @@ extension SocketBusinessManager {
     func fetchOfflineMsg() {
         self.socketMgr.socket.emit(SocketBusinessManager.offlineMsg.emitEvent, with: [["from": user.userId, "to": "server"]])
     }
-    //发送服务端：获取历史消息
-    func fetchHistoryMsg() {
-        self.socketMgr.socket.emit(SocketBusinessManager.historyMsg.emitEvent, with: [["from": user.userId, "to": "server"]])
+    //发送服务端：获取历史好友消息
+    func fetchHistoryMsg(from friendID: String) {
+        let dic = ["to": friendID, "type": "friend"]
+        let finalDic = self.addCommonParameters(dic)
+        self.socketMgr.socket.emit(SocketBusinessManager.historyMsg.emitEvent, with: [finalDic])
     }
     //发送消息
     func sendMessage(model: MessageModel) {
         self.socketMgr.socket.emit(SocketBusinessManager.sendMessage.emitEvent, with: [model.mapDic()])
+    }
+    func addCommonParameters(_ dic: [String: Any])-> [String: Any] {
+        var commonDic: [String : Any] = ["id": 0, "from": user.userId, "date": 1524021772436, "len": 10]
+        commonDic.merge(dic) { $1 }
+        
+        return commonDic
     }
 }
 extension SocketBusinessManager {
@@ -103,6 +111,7 @@ protocol SocketBusinessDelegate: class {
     func receiveFriendApprove(_ data: SocketSystemMessage)
     func receiveMessage(_ data: SocketSystemMessage)
     func receiveCommentChatMessage(_ message: MessageModel)
+    func receiveHistoryChatMessage(_ message: MessageModel) 
 }
 extension SocketBusinessDelegate {
     func receiveData(_ data: SocketMessageModel) {
@@ -118,6 +127,9 @@ extension SocketBusinessDelegate {
         
     }
     func receiveCommentChatMessage(_ message: MessageModel) {
+        
+    }
+    func receiveHistoryChatMessage(_ message: MessageModel) {
         
     }
 }
