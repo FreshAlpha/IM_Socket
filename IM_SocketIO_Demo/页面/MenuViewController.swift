@@ -11,12 +11,12 @@ import Moya
 class MenuViewController: BaseViewController {
     
     @IBOutlet weak var friendsList: UIButton!
-    private let socketMgr = SocketBusinessManager.shared()
+    private let socketMgr = SocketIOManager.shared()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "菜单"
         // Do any additional setup after loading the view.
-        socketMgr.addDelegate(delegate: self)
+        socketMgr.chatManager.addDelegate(self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,18 +27,16 @@ class MenuViewController: BaseViewController {
     @IBAction func clickBtn(_ sender: UIButton) {
         switch sender.tag {
         case 1001:
-            socketMgr.fetchOfflineMsg()
+            socketMgr.chatManager.fetchOfflineMsg()
         case 1002:
             self.pushToFriendList()
         case 1003:
             break
         case 1004:
             self.pushToFriendInvationList()
-            IMManager.shared().addFriend(by: "5acdbddd15256f119f596567")//搜索好友请求失败，直接添加好友（175的账号）
-//            requestSearchFriends()
         case 1005:
             break
-        case 1006:
+        case 1006://创建群
             break
         case 1007:
             break
@@ -56,6 +54,9 @@ class MenuViewController: BaseViewController {
         self.navigationController?.pushViewController(friendsInvationVC, animated: true)
     }
     
+    
+}
+extension MenuViewController: SocketChatManagerDelegate {
     
 }
 extension MenuViewController: SocketBusinessDelegate {

@@ -17,13 +17,19 @@ class RegisterVC: BaseViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
+    @IBAction func back(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func register(_ sender: Any) {
         guard let username = usernameTF.text else {
             return
         }
         guard let psd = psdTF.text, let rePsd = psdReTF.text, psd == rePsd else {return}
-        
+        SocketIOManager.shared().register(with: username, password: psd) { (error) in
+            guard case .success = error else {return}
+            self.dismiss(animated: true, completion: nil)
+        }
         
     }
     override func didReceiveMemoryWarning() {
@@ -32,14 +38,5 @@ class RegisterVC: BaseViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

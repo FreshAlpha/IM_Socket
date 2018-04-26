@@ -35,10 +35,9 @@ class ViewController: BaseViewController {
         guard let username = usernameTF.text, let pwd = psdTF.text else {
             return
         }
-        IMManager.shared().login(username: username, pwd: pwd) { (success) in
-            if success {
-                self.showMenu()
-            }
+        SocketIOManager.shared().login(with: username, password: pwd) { (error) in
+            guard case .success = error else {return}
+            self.showMenu()
         }
     }
     private func showMenu() {
