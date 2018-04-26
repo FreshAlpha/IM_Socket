@@ -15,22 +15,19 @@ extension Response {
         guard let responseMapJSON = try? self.mapJSON() else {return nil}
         return JSON(responseMapJSON)
     }
-    var serverCodeType: ResponseCode {
+    
+    var socketResultCode: SocketErrorType {
         guard self.statusCode == 200 else {
-            return .serverNot200
+            return .noCode
         }
-        guard let code = responseJSON?["code"].int, code == 1 else {
-            return .invalidResponse
+        guard let code = responseJSON?["code"].int else {
+            return .noCode
         }
-        return .success
-    }
-    var serverCode: Int? {
-        return responseJSON?["code"].int
+        guard let codeType = SocketErrorType(rawValue: code) else {
+            return .noCode
+        }
+        return codeType
     }
     
 }
-enum ResponseCode {
-    case serverNot200
-    case success
-    case invalidResponse
-}
+

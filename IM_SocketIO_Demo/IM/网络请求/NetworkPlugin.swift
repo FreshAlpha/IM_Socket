@@ -27,8 +27,8 @@ class NetworkPlugin: PluginType {
         switch result {
         case .success(let response):
             guard let target = target as? UserApi else {return}
-            if response.serverCodeType == .invalidResponse {
-                print(response.serverCode)
+            if response.socketResultCode != .success {
+                print(response.socketResultCode.errorLog)
                 if let message = response.responseJSON?["message"].string {
                     print(message)
                 }

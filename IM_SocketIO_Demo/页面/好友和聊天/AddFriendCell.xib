@@ -27,15 +27,15 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhh-AV-DVM">
-                        <rect key="frame" x="56" y="10" width="179" height="21"/>
+                        <rect key="frame" x="56" y="10" width="153" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g01-Mu-zbN">
-                        <rect key="frame" x="245" y="17" width="44" height="44"/>
+                        <rect key="frame" x="219" y="17" width="75" height="44"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="44" id="dKf-9p-ybi"/>
+                            <constraint firstAttribute="width" constant="75" id="dKf-9p-ybi"/>
                             <constraint firstAttribute="height" constant="44" id="tMf-dm-7mf"/>
                         </constraints>
                         <state key="normal" title="添加"/>
@@ -44,7 +44,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aAr-xV-9ML">
-                        <rect key="frame" x="16" y="47" width="219" height="21"/>
+                        <rect key="frame" x="16" y="47" width="193" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -56,7 +56,7 @@
                     <constraint firstItem="hhh-AV-DVM" firstAttribute="leading" secondItem="E00-ir-Qxb" secondAttribute="trailing" constant="10" id="CUW-4L-Cwj"/>
                     <constraint firstItem="g01-Mu-zbN" firstAttribute="leading" secondItem="aAr-xV-9ML" secondAttribute="trailing" constant="10" id="Cvx-aV-fbV"/>
                     <constraint firstItem="E00-ir-Qxb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="D0b-QQ-S7O"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="g01-Mu-zbN" secondAttribute="trailing" constant="15" id="ID3-Q7-32e"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="g01-Mu-zbN" secondAttribute="trailing" constant="10" id="ID3-Q7-32e"/>
                     <constraint firstItem="E00-ir-Qxb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Vvd-xY-Ado"/>
                     <constraint firstItem="g01-Mu-zbN" firstAttribute="leading" secondItem="hhh-AV-DVM" secondAttribute="trailing" constant="10" id="bXS-ie-VZ4"/>
                     <constraint firstItem="aAr-xV-9ML" firstAttribute="top" secondItem="E00-ir-Qxb" secondAttribute="bottom" constant="6" id="e4q-Ck-57J"/>

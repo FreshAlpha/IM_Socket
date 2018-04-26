@@ -14,7 +14,7 @@ class WeakSocketDelegate: NSObject {
         self.delegate = delegate
     }
 }
-class SocketBusinessManager: NSObject {
+final class SocketBusinessManager: NSObject {
     private let socketMgr = SocketIOManager.shared()
     private let user = UserInfo.shared()
     var delegates = [WeakSocketDelegate]()
@@ -60,36 +60,15 @@ class SocketBusinessManager: NSObject {
 }
 //MARK: -跟服务器遵循相关文本协议，定制的业务方法
 extension SocketBusinessManager {
-    //发送服务端：获取离线消息
-    func fetchOfflineMsg() {
-        self.socketMgr.socket.emit(SocketBusinessManager.offlineMsg.emitEvent, with: [["from": user.userId, "to": "server"]])
-    }
-    //发送服务端：获取历史好友消息
-    func fetchHistoryMsg(from friendID: String) {
-        let dic = ["to": friendID, "type": "friend"]
-        let finalDic = self.addCommonParameters(dic)
-        self.socketMgr.socket.emit(SocketBusinessManager.historyMsg.emitEvent, with: [finalDic])
-    }
-    //发送消息
-    func sendMessage(model: MessageModel) {
-        self.socketMgr.socket.emit(SocketBusinessManager.sendMessage.emitEvent, with: [model.mapDic()])
-    }
-    func addCommonParameters(_ dic: [String: Any])-> [String: Any] {
-        var commonDic: [String : Any] = ["id": 0, "from": user.userId, "date": 1524021772436, "len": 10]
-        commonDic.merge(dic) { $1 }
-        
-        return commonDic
-    }
+    
+    
 }
 extension SocketBusinessManager {
     //注册接收消息方法
     private func registerCommon() {
         register(SocketBusinessManager.auth)
-        register(SocketBusinessManager.offlineMsg)
-        register(SocketBusinessManager.historyMsg)
         register(SocketBusinessManager.friendInvitation)
         register(SocketBusinessManager.friendApproved)
-        register(SocketBusinessManager.sendMessage)
     }
     private func register(_ function: SocketFunction) {
         self.socketMgr.socket.on(function.responseEvent) { (data: [Any], ack: SocketAckEmitter) in
@@ -139,5 +118,19 @@ extension SocketBusinessManager {
        return self.chatMessages.filter { (model) -> Bool in
             return model.from == friendID || model.to == friendID
         }
+    }
+}
+extension DispatchQueue {
+    private static var onceTracker = [String]()
+    public class func once(token: String, block: (()->())) {
+        objc_sync_enter(self)
+        defer {
+            objc_sync_exit(self)
+        }
+        if onceTracker.contains(token) {
+            return
+        }
+        onceTracker.append(token)
+        block()
     }
 }

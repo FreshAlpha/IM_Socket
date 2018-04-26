@@ -21,28 +21,8 @@ extension SocketBusinessManager {
         print("认证结果")
         
     }
-    //离线消息
-    static let offlineMsg: SocketFunction = SocketFunction(emitEvent: "caoff", responseEvent: "saoff") { (data, mgr) in
-        print("离线消息")
-        let message = SocketMessageModel(isSend: false, eventName: .offlineMsg)
-        mgr.delegates.forEach({ (delegator) in
-            delegator.delegate?.receiveData(message)
-        })
-    }
-    //历史消息
-    static let historyMsg: SocketFunction = SocketFunction(emitEvent: "chistory", responseEvent: "shistory") { (data, mgr) in
-        print("历史消息")
-        //TODO: -取key为data的数据，返回的数据有待分析
-        guard let responseJson = JSON(data).array?.first else {return}
-        let model = MessageModel(with: JSON(responseJson))
-        objc_sync_enter(self)
-        mgr.chatMessages.append(model)
-        objc_sync_exit(self)
-        mgr.delegates.forEach({ (delegator) in
-            delegator.delegate?.receiveHistoryChatMessage(model)
-        })
-        
-    }
+  
+    
     //别人请求添加你为好友
     /*返回信息
      [{
@@ -81,22 +61,21 @@ extension SocketBusinessManager {
             delegator.delegate?.receiveFriendApprove(model)
         })
     }
-    //互发消息
-    static let sendMessage: SocketFunction = SocketFunction(emitEvent: "cfmsg", responseEvent: "sfmsg") { (data, mgr) in
-        print("其他用户发到自己的信息,或者上次发送的消息的回执")
-        guard let responseJson = JSON(data).array?.first else {return}
-        let model = MessageModel(with: JSON(responseJson))
-        objc_sync_enter(self)
-        mgr.chatMessages.append(model)
-        objc_sync_exit(self)
-        mgr.delegates.forEach({ (delegator) in
-            delegator.delegate?.receiveCommentChatMessage(model)
-        })
-    }
+    
     static let friendOnline: SocketFunction = SocketFunction(emitEvent: "", responseEvent: "sfonline") { (data, mgr) in
         print("好友上线消息")
     }
     static let friendOffline: SocketFunction = SocketFunction(emitEvent: "", responseEvent: "sfoffline") { (data, mgr) in
         print("好友下线消息")
+    }
+}
+struct MessageSource {
+    let identifier: String
+    let from: String
+    let to: String
+    init(with json: JSON) {
+        identifier = json["_id"].stringValue
+        from = json["myid"].stringValue
+        to = json["frid"].stringValue
     }
 }

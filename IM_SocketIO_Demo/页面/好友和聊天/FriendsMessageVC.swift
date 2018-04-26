@@ -10,26 +10,34 @@ import UIKit
 import Moya
 class FriendsMessageVC: BaseViewController {
     let provider = MoyaProvider<UserApi>(plugins: [NetworkPlugin()])
-    private let socketMgr = SocketBusinessManager.shared()
     @IBOutlet weak var mainTable: UITableView!
     @IBOutlet weak var inputTF: UITextField!
-    var invationArray: [SocketSystemMessage] = {
-        let array = SocketBusinessManager.shared().friendInvations
+    var invationArray: [ContactModel] = {
+        let array = SocketIOManager.shared().contactManager.getInvitations()
         return array
     }()
-    var friendsArray = [SocketSystemMessage]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mainTable.register(UINib(nibName: "AddFriendCell", bundle: nil), forCellReuseIdentifier: "AddFriendCell")
-        socketMgr.addDelegate(delegate: self)
+        SocketIOManager.shared().contactManager.addDelegate(self)
     }
 
     @IBAction func addFriend(_ sender: Any) {
         self.addFriend()
     }
     func addFriend() {
-        let friendID: String = inputTF.text ?? "5acdbddd15256f119f596567" //不填就加175账号
-        IMManager.shared().addFriend(by: friendID)
+        let friendID: String
+        if let text = inputTF.text, text.count > 0 {
+            friendID = text
+        } else {
+            friendID = "5acdbddd15256f119f596567" //不填就加175账号
+        }
+        SocketIOManager.shared().contactManager.requestForAddingFriend(by: friendID, messsage: "hello, i'm from ios") { (contact, error) in
+            guard case .success = error, let contact = contact else {return}
+            self.invationArray.insert(contact, at: 0)
+            self.mainTable.reloadData()
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -48,11 +56,11 @@ extension FriendsMessageVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let addCell = tableView.dequeueReusableCell(withIdentifier: "AddFriendCell", for: indexPath) as! AddFriendCell
         let model = invationArray[indexPath.row]
-        addCell.configureCell(with: model) {
-            IMManager.shared().approveMakingFriend(by: model.fromID, callBack: { (isSuccess) in
-                guard isSuccess else {return}
-                self.invationArray.remove(at: indexPath.row)
-                self.mainTable.reloadData()
+        addCell.configureCell(with: model) {//同意添加
+            SocketIOManager.shared().contactManager.approveMakingFriend(by: model.from, completion: { (error) in
+                guard case .success = error else {return}
+                model.contactType = .approveFriend
+                self.mainTable.reloadRows(at: [indexPath], with: .none)
             })
         }
         return addCell
@@ -70,11 +78,10 @@ extension FriendsMessageVC: UITextFieldDelegate {
         return true
     }
 }
-extension FriendsMessageVC: SocketBusinessDelegate {
-   //新的好友请求
-    func receiveFriendInvation(_ data: SocketSystemMessage) {
-        self.invationArray.insert(data, at: 0)
+extension FriendsMessageVC: SocketContactManagerDelegate {
+    //新的好友请求
+    func receiveFriendInvation(_ contact: ContactModel) {
+        self.invationArray.insert(contact, at: 0)
         self.mainTable.reloadData()
     }
-   
 }

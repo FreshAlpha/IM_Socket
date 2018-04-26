@@ -14,6 +14,7 @@ class ChatVC: BaseViewController {
     @IBOutlet weak var inputBottomConstaint: NSLayoutConstraint!
     private let friendID: String
     private let socketMgr = SocketBusinessManager.shared()
+    private let socketIOMgr = SocketIOManager.shared()
     private var chatArray = [MessageModel]()
     required init(with friendID: String) {
         self.friendID = friendID
@@ -44,7 +45,7 @@ class ChatVC: BaseViewController {
             return
         }
         let msgModel = MessageModel(from: UserInfo.shared().userId, to: friendID, identifier: "myInfo", msg: message)
-        socketMgr.sendMessage(model: msgModel)
+        socketIOMgr.chatManager.sendMessage(msgModel)
         self.inputTF.text = nil
     }
     @objc private func showKeyBoard(_ noti: NSNotification) {
