@@ -18,4 +18,14 @@ extension SocketContactManager {
             delegator.delegate?.receiveFriendInvation(contact.copy() as! ContactModel)
         })
     }
+    //别人同意你的好友请求
+    static let friendApproved = SocketReceiveFuntion<SocketContactManager>(cmd: "addfriendcheckreply") { (data, mgr) in
+        print("别人同意你的好友请求")
+        guard let responseJson = JSON(data).array?.first else {return}
+        let contact = ContactModel(bySocket: responseJson, contact: .friendAppriveMe)
+        mgr.addInvitation(contact)
+        mgr.weakDelegates.forEach({ (delegator) in
+            delegator.delegate?.receiveFriendInvation(contact.copy() as! ContactModel)
+        })
+    }
 }

@@ -10,10 +10,16 @@ import Foundation
 protocol SocketContactManagerDelegate: class {
     //新的好友请求
     func receiveFriendInvation(_ contact: ContactModel)
+    //别人同意你的好友请求
+    func receiveFriendApproved(_ contact: ContactModel)
 }
 extension SocketContactManagerDelegate {
     //新的好友请求
     func receiveFriendInvation(_ contact: ContactModel) {
+        
+    }
+    //别人同意你的好友请求
+    func receiveFriendApproved(_ contact: ContactModel) {
         
     }
 }

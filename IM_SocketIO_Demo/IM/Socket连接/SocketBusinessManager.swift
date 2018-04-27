@@ -26,18 +26,9 @@ final class SocketBusinessManager: NSObject {
     }
     private override init() {
         super.init()
-        self.socketMgr.delegate = self
-        self.registerCommon()
+       
     }
     
-    //MARK: -基本连接方法
-    func connect() {
-        guard let _ = user.sessionID else {return}
-        socketMgr.connect()
-    }
-    func disconnect() {
-        socketMgr.disconnect()
-    }
 //MARK: -想要收到消息，必须添加代理
     func addDelegate(delegate: SocketBusinessDelegate) {
         self.delegates.append(WeakSocketDelegate(delegate: delegate))//防止数组直接放delegate，强引用外部对象。
@@ -58,48 +49,25 @@ final class SocketBusinessManager: NSObject {
     }
     
 }
-//MARK: -跟服务器遵循相关文本协议，定制的业务方法
+
 extension SocketBusinessManager {
-    
-    
-}
-extension SocketBusinessManager {
-    //注册接收消息方法
-    private func registerCommon() {
-        register(SocketBusinessManager.auth)
-        register(SocketBusinessManager.friendInvitation)
-        register(SocketBusinessManager.friendApproved)
-    }
+   
     private func register(_ function: SocketFunction) {
         self.socketMgr.socket.on(function.responseEvent) { (data: [Any], ack: SocketAckEmitter) in
             function.handler(data, self)
         }
     }
 }
-extension SocketBusinessManager: SocketIOManagerSettingDelegate {
-    //认证，传sessionid
-    func connectSuccess() {
-        guard let sessionID = user.sessionID else {return}
-        self.socketMgr.socket.emit(SocketBusinessManager.auth.emitEvent, with: [["sessionid" : sessionID]])
-    }
-}
+
 protocol SocketBusinessDelegate: class {
     //MARK: -目前只写一个方法，通过model的messageType区分不同消息，后续如果有扩展，再添加其它方法
     func receiveData(_ data: SocketMessageModel)
-    func receiveFriendInvation(_ data: SocketSystemMessage)
-    func receiveFriendApprove(_ data: SocketSystemMessage)
     func receiveMessage(_ data: SocketSystemMessage)
     func receiveCommentChatMessage(_ message: MessageModel)
     func receiveHistoryChatMessage(_ message: MessageModel) 
 }
 extension SocketBusinessDelegate {
     func receiveData(_ data: SocketMessageModel) {
-        
-    }
-    func receiveFriendInvation(_ data: SocketSystemMessage) {
-         
-    }
-    func receiveFriendApprove(_ data: SocketSystemMessage) {
         
     }
     func receiveMessage(_ data: SocketSystemMessage){

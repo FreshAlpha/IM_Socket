@@ -8,6 +8,7 @@
 
 import Foundation
 enum SocketEmitType {
+    case auth
     case sendMessage(MessageModel)
     case offlineMessage
     case friendHistoryMessage(String)
@@ -17,6 +18,8 @@ enum SocketEmitType {
 extension SocketEmitType {
     var cmd: String {
         switch self {
+        case .auth:
+            return "auth-c"
         case .sendMessage:
             return "cfmsg"
         case .offlineMessage:
@@ -27,6 +30,9 @@ extension SocketEmitType {
     }
     var parameters: [Any] {
         switch self {
+        case .auth:
+            let dic = ["sessionid" : UserInfo.shared().sessionID]
+            return [dic]
         case .sendMessage(let message):
             let dic = message.mapDic()
             return [dic]
@@ -41,7 +47,6 @@ extension SocketEmitType {
             let dic = ["to": groupID, "type": "group"]
             let finalDic = self.addCommonParameters(dic)
             return [finalDic]
-            
         }
     }
     func addCommonParameters(_ dic: [String: Any])-> [String: Any] {

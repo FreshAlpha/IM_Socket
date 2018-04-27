@@ -35,8 +35,7 @@ class FriendsMessageVC: BaseViewController {
         }
         SocketIOManager.shared().contactManager.requestForAddingFriend(by: friendID, messsage: "hello, i'm from ios") { (contact, error) in
             guard case .success = error, let contact = contact else {return}
-            self.invationArray.insert(contact, at: 0)
-            self.mainTable.reloadData()
+            self.handleNew(contact)
         }
     }
     override func didReceiveMemoryWarning() {
@@ -78,10 +77,21 @@ extension FriendsMessageVC: UITextFieldDelegate {
         return true
     }
 }
+extension FriendsMessageVC {
+    func handleNew(_ contact: ContactModel) {
+        let resultType = self.invationArray.addContact(contact)
+        if resultType != .noChange {
+            self.mainTable.reloadData()
+        }
+    }
+}
 extension FriendsMessageVC: SocketContactManagerDelegate {
     //新的好友请求
     func receiveFriendInvation(_ contact: ContactModel) {
-        self.invationArray.insert(contact, at: 0)
-        self.mainTable.reloadData()
+        self.handleNew(contact)
+    }
+    //别人同意你的好友请求
+    func receiveFriendApproved(_ contact: ContactModel) {
+        self.handleNew(contact)
     }
 }

@@ -17,8 +17,7 @@ class SocketIOManager: NSObject {
     private var manager = SocketManager(socketURL: URL(string: "http://123.206.136.17:8080")!, config: [.log(true)])
      var socket: SocketIOClient!
     private let httpConnect = HttpConnect()
-    weak var delegate: SocketIOManagerSettingDelegate?
-
+//PUBLIC
     public let chatManager = SocketChatManager()
     public let contactManager = SocketContactManager()
     private override init() {
@@ -42,7 +41,11 @@ class SocketIOManager: NSObject {
     private func handleServerEvents() {
         socket.on(clientEvent: .connect) { (data, ack) in
             print("socket连上")
-            self.delegate?.connectSuccess()
+            let emitType = SocketEmitType.auth
+            self.socket.emit(emitType.cmd, with: emitType.parameters)
+        }
+        socket.on("auth-s") { (data, ack) in
+            print("认证结果")
         }
         registerChatEvents()
         registerContactEvents()
@@ -61,6 +64,7 @@ class SocketIOManager: NSObject {
     //注册接收消息方法
     private func registerContactEvents() {
         registerContact(SocketContactManager.friendInvitation)
+        registerContact(SocketContactManager.friendApproved)
     }
     private func registerContact(_ function: SocketReceiveFuntion<SocketContactManager>) {
         socket.on(function.cmd) { (data: [Any], ack: SocketAckEmitter) in
@@ -88,7 +92,4 @@ extension SocketIOManager {
         }
     }
 }
-protocol SocketIOManagerSettingDelegate: class {
-    func connectSuccess()//服务端必须要验证sessionID，否则会断开连接(服务端说的，但是经过验证很久都没断开)
-    
-}
+

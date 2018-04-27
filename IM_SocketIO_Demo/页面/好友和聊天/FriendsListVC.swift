@@ -21,6 +21,7 @@ class FriendsListVC: BaseViewController {
             guard case .success = error else {return}
             guard let friends = friends, friends.count > 0 else {return}
             self.dataArray = friends
+            self.mainTable.reloadData()
         }
     }
     

@@ -75,6 +75,7 @@ extension SocketContactManager {
 extension SocketContactManager {
     func getInvitations() -> [ContactModel] {
         let array = Array(self.friendInvitations.values)
+        //TODO:按时间排序
         return array.map{$0.copy() as! ContactModel}
     }
     func addInvitation(_ invitation: ContactModel) {
