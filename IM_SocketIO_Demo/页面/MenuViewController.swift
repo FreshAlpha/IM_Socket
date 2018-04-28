@@ -59,24 +59,4 @@ class MenuViewController: BaseViewController {
 extension MenuViewController: SocketChatManagerDelegate {
     
 }
-extension MenuViewController: SocketBusinessDelegate {
-    func receiveFriendInvation(_ data: SocketSystemMessage) {
-        print("来自好友申请")
-        print(data)
-    }
-    func receiveFriendApprove(_ data: SocketSystemMessage) {
-        print("好友同意添加请求")
-        print(data)
-    }
-    
-    func receiveData(_ data: SocketMessageModel) {
-        switch data.eventName {
-        case .friendInvation:
-            print("有个好友申请")
-        case .offlineMsg:
-            print("离线消息")
-        case .historyMsg:
-            print("历史消息")
-        }
-    }
-}
+

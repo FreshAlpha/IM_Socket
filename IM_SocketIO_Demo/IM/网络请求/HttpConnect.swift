@@ -156,8 +156,6 @@ extension HttpConnect {
                 print("同意好友友申请失败")
                 return
             }
-            //删除这条记录
-            SocketBusinessManager.shared().delegateInvation(by: friendID)
             callBack?(.success)
         }
     }

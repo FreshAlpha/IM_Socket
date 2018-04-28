@@ -9,6 +9,7 @@
 import Foundation
 @objc
 enum SocketErrorType: NSInteger {
+    case noHistoryMessage = -3
     case noCode = -2 //没有返回code,或者code超出范围
     case unkownedError = -1
     case failure = 0

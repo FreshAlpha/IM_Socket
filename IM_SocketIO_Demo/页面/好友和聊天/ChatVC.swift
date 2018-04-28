@@ -13,11 +13,12 @@ class ChatVC: BaseViewController {
     @IBOutlet weak var mainTable: UITableView!
     @IBOutlet weak var inputBottomConstaint: NSLayoutConstraint!
     private let friendID: String
-    private let socketMgr = SocketBusinessManager.shared()
     private let socketIOMgr = SocketIOManager.shared()
-    private var chatArray = [MessageModel]()
+    private var chatArray = [SocketMessage]()
+    private let conversation: SocketConversationModel
     required init(with friendID: String) {
         self.friendID = friendID
+        self.conversation = socketIOMgr.chatManager.getConversation(with: friendID)
         super.init(nibName: "ChatVC", bundle: nil)
     }
     
@@ -27,13 +28,22 @@ class ChatVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = friendID
-        self.chatArray = socketMgr.chatMessages(with: friendID)
+//        self.chatArray = socketMgr.chatMessages(with: friendID)
         mainTable.register(UINib(nibName: "ChatCell", bundle: nil), forCellReuseIdentifier: "myChat")
         mainTable.register(UINib(nibName: "OtherChatCell", bundle: nil), forCellReuseIdentifier: "OtherChat")
-        socketMgr.addDelegate(delegate: self)
+        socketIOMgr.chatManager.addDelegate(self)
         NotificationCenter.default.addObserver(self, selector: #selector(self.showKeyBoard(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.hideKeyboard(_:)), name: .UIKeyboardWillHide, object: nil)
-                // Do any additional setup after loading the view.
+        self.conversation.fetchMessageFrom(nil, 10, completion: { (messages, error) in
+            guard let messages = messages else {
+                return
+            }
+            self.chatArray = messages
+            self.mainTable.reloadData()
+            if case .noHistoryMessage = error {
+                print("没有历史消息，table的头不用下拉加载了")
+            }
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,8 +80,8 @@ extension ChatVC: UITableViewDelegate, UITableViewDataSource {
         return chatArray.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model: MessageModel = chatArray[indexPath.row]
-        if model.isSender {
+        let model: SocketMessage = chatArray[indexPath.row]
+        if model.direction == .send {
             let cell: ChatCell = tableView.dequeueReusableCell(withIdentifier: "myChat", for: indexPath) as! ChatCell
             cell.configureCell(with: model)
             return cell
@@ -94,8 +104,8 @@ extension ChatVC: UITextFieldDelegate {
         return true
     }
 }
-extension ChatVC: SocketBusinessDelegate {
-    func receiveCommentChatMessage(_ message: MessageModel) {
+extension ChatVC: SocketChatManagerDelegate {
+    func receiveCommonChatMessage(_ message: SocketMessage) {
         chatArray.append(message)
         self.mainTable.reloadData()
         guard chatArray.count > 0 else {
@@ -104,3 +114,4 @@ extension ChatVC: SocketBusinessDelegate {
         self.mainTable.scrollToRow(at: IndexPath(item: chatArray.count - 1, section: 0), at: .top, animated: true)
     }
 }
+

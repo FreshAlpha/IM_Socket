@@ -28,4 +28,10 @@ extension SocketContactManager {
             delegator.delegate?.receiveFriendInvation(contact.copy() as! ContactModel)
         })
     }
+    static let friendOnline = SocketReceiveFuntion<SocketContactManager>(cmd: "sfonline") { (data, mgr) in
+        print("好友上线消息")
+    }
+    static let friendOffline = SocketReceiveFuntion<SocketContactManager>(cmd: "sfoffline") { (data, mgr) in
+        print("好友下线消息")
+    }
 }

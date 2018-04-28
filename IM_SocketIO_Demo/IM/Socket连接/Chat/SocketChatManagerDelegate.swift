@@ -8,10 +8,10 @@
 
 import Foundation
 protocol SocketChatManagerDelegate: class {
-    func receiveMessages(_ messages: [MessageModel])
+    func receiveCommonChatMessage(_ message: SocketMessage)
 }
 extension SocketChatManagerDelegate {
-    func receiveMessages(_ messages: [MessageModel]) {
+    func receiveCommonChatMessage(_ message: SocketMessage) {
         
     }
 }

@@ -11,3 +11,4 @@ import Foundation
 typealias ResultHandler = (SocketErrorType)->()
 typealias FriendsHandler = ([FriendModel]?, SocketErrorType) -> ()
 typealias ContactHandler = (ContactModel?, SocketErrorType)->()
+typealias MessagesHandler = ([SocketMessage]?, SocketErrorType)->()

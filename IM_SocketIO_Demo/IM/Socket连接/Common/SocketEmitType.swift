@@ -11,8 +11,8 @@ enum SocketEmitType {
     case auth
     case sendMessage(MessageModel)
     case offlineMessage
-    case friendHistoryMessage(String)
-    case groupHistoryMessage(String)
+    case friendHistoryMessage(String, Double?)
+    case groupHistoryMessage(String, Double?)
     
 }
 extension SocketEmitType {
@@ -39,20 +39,32 @@ extension SocketEmitType {
         case .offlineMessage:
             let dic = ["from" : UserInfo.shared().userId, "to": "server"]
             return [dic]
-        case .friendHistoryMessage(let friendID):
-            let dic = ["to": friendID, "type": "friend"]
+        case .friendHistoryMessage(let friendID, let timestamp):
+            let date: Double
+            if let timestamp = timestamp {
+                date = timestamp
+            } else {
+                let now = Date()
+                date = now.timeIntervalSince1970 * 1000 //取毫秒，单位毫秒
+            }
+            let dic: [String: Any] = ["to": friendID, "type": "friend", "date": date]
             let finalDic = self.addCommonParameters(dic)
             return [finalDic]
-        case .groupHistoryMessage(let groupID):
-            let dic = ["to": groupID, "type": "group"]
+        case .groupHistoryMessage(let groupID, let timestamp):
+            let date: Double
+            if let timestamp = timestamp {
+                date = timestamp
+            } else {
+                let now = Date()
+                date = now.timeIntervalSince1970 * 1000 //取毫秒，单位毫秒
+            }
+            let dic: [String: Any] = ["to": groupID, "type": "group", "date": date]
             let finalDic = self.addCommonParameters(dic)
             return [finalDic]
         }
     }
     func addCommonParameters(_ dic: [String: Any])-> [String: Any] {
-        let now = Date()
-        let timestamp = now.timeIntervalSince1970 * 1000 //取毫秒，单位毫秒
-        var commonDic: [String : Any] = ["id": 0, "from": UserInfo.shared().userId, "date": timestamp, "len": 10]
+        var commonDic: [String : Any] = ["id": 0, "from": UserInfo.shared().userId, "len": 10]
         commonDic.merge(dic) { $1 }
         
         return commonDic

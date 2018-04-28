@@ -17,9 +17,11 @@ class ChatCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    func configureCell(with model: MessageModel) {
-        nameLbl.text = model.isSender ? model.from : model.to
-        messageLbl.text = model.msg
+    func configureCell(with model: SocketMessage) {
+        nameLbl.text = model.from
+        if let body = model.body as? SocketTextBody {
+            messageLbl.text = body.text
+        }
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
