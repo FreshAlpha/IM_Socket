@@ -26,7 +26,7 @@ final class SocketBusinessManager: NSObject {
 
 extension SocketBusinessManager {
     //与某个朋友的对话
-    func chatMessages(with friendID: String)-> [MessageModel] {
+    func chatMessages(with friendID: Int)-> [MessageModel] {
        return self.chatMessages.filter { (model) -> Bool in
             return model.from == friendID || model.to == friendID
         }

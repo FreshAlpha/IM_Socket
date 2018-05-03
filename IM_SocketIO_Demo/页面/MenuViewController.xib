@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MenuViewController" customModule="IM_SocketIO_Demo" customModuleProvider="target">
             <connections>
                 <outlet property="friendsList" destination="2lR-83-hoV" id="XbI-t9-xhd"/>
+                <outlet property="myLabel" destination="9EQ-MV-zWN" id="bkX-2X-0Ak"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,6 +22,12 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9EQ-MV-zWN">
+                    <rect key="frame" x="16" y="40" width="343" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="KmE-W5-aVd">
                     <rect key="frame" x="16" y="60" width="343" height="557"/>
                     <subviews>
@@ -110,10 +117,13 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="trailingMargin" secondItem="9EQ-MV-zWN" secondAttribute="trailing" id="8fl-qf-CPh"/>
                 <constraint firstAttribute="trailingMargin" secondItem="KmE-W5-aVd" secondAttribute="trailing" id="9uV-UR-zy4"/>
                 <constraint firstAttribute="bottomMargin" secondItem="KmE-W5-aVd" secondAttribute="bottom" constant="50" id="HkD-pa-e2u"/>
                 <constraint firstItem="KmE-W5-aVd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="topMargin" constant="40" id="r44-aH-k87"/>
+                <constraint firstItem="9EQ-MV-zWN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="tKp-Ko-2Vm"/>
                 <constraint firstItem="KmE-W5-aVd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="ymQ-wo-eiy"/>
+                <constraint firstItem="9EQ-MV-zWN" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="topMargin" constant="20" id="zI0-Il-RNO"/>
             </constraints>
             <point key="canvasLocation" x="24.5" y="51.5"/>
         </view>

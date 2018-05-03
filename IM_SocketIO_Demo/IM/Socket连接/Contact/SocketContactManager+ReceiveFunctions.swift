@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 extension SocketContactManager {
-    static let friendInvitation = SocketReceiveFuntion<SocketContactManager>(cmd: "addfriend") { (data, mgr) in
+    static let friendInvitation = SocketReceiveFuntion<SocketContactManager>(cmd: "f_add") { (data, mgr) in
         print("别人请求添加你为好友")
         guard let responseJson = JSON(data).array?.first else {return}
         let contact = ContactModel(bySocket: responseJson, contact: .friendInvitation)
@@ -19,7 +19,7 @@ extension SocketContactManager {
         })
     }
     //别人同意你的好友请求
-    static let friendApproved = SocketReceiveFuntion<SocketContactManager>(cmd: "addfriendcheckreply") { (data, mgr) in
+    static let friendApproved = SocketReceiveFuntion<SocketContactManager>(cmd: "f_addreply") { (data, mgr) in
         print("别人同意你的好友请求")
         guard let responseJson = JSON(data).array?.first else {return}
         let contact = ContactModel(bySocket: responseJson, contact: .friendAppriveMe)

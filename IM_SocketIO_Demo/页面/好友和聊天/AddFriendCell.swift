@@ -20,7 +20,7 @@ class AddFriendCell: UITableViewCell {
         // Initialization code
     }
     func configureCell(with model: ContactModel, block: (()->())?) {
-        nameLbl.text = model.from
+        nameLbl.text = "\(model.from)"
         msgLbl.text = model.msg
         var canClick = false
         submitBtn.isUserInteractionEnabled = false

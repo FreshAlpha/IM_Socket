@@ -9,9 +9,9 @@
 import UIKit
 
 class SocketConversationModel: NSObject {
-    let conversationID: String //单聊就是朋友的userID，群组就是groupID
+    let conversationID: Int //单聊就是朋友的userID，群组就是groupID
     var messages = [SocketMessage]()
-    required init(_ conversationID: String) {
+    required init(_ conversationID: Int) {
         self.conversationID = conversationID
         super.init()
     }

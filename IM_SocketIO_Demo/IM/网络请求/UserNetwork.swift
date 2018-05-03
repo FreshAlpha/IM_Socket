@@ -9,56 +9,59 @@
 import Foundation
 import Moya
 enum UserApi {
-    case login(userName: String, psd: String)
-    case register(userName: String, psd: String)
+    case login(userName: String, pwd: String)
+    case register(userName: String, pwd: String, email: String, age: Int, sex: Int)
     case userInfo
     case getSessionID
-    case searchName(keyword: String)
-    case addFriend(friendID: String, msg: String)
-    case approveFriend(friendID: String)
+    case searchName(keyword: String, page: Int, pagesize: Int)
+    case addFriend(friendID: Int, msg: String)
+    case approveFriend(friendID: Int, approved: Bool)
     case friendList
     case createGroup(name: String, remark: String)
-    case searchGroup(keyword: String)
-    case joinGroup(groupID: String, msg: String)
+    case searchGroup(keyword: String, page: Int, pagesize: Int)
+    case joinGroup(ownerID: String, groupID: String, msg: String)
+    case approveJoinGroup(messageID: String)
 }
 
 extension UserApi: TargetType {
     var baseURL: URL {
-        return URL(string: "http://123.206.136.17:8080")!
+        return URL(string: "http://123.206.136.17:8111")!
     }
     
     var path: String {
         switch self {
         case .login:
-            return "/cyzm6/public/user/login"
+            return "/pub/user/login"
         case .register:
-            return "/cyzm6/public/user/register"
+            return "/pub/user/regist"
         case .userInfo:
-            return "/suser/private/user/user/myinfo"
+            return "/user/myinfo"
         case .getSessionID:
-            return "/suser/sessionid"
+            return "/user/sessionid"
         case .searchName:
-            return "/suser/private/friend/searchname"
+            return "/user/searchname"
         case .addFriend:
-            return "/suser/private/friend/add"
+            return "/friend/add"
         case .approveFriend:
-            return "/suser/private/friend/addcheck"
+            return "/friend/addcheck"
         case .friendList:
-            return "/suser/private/friend/getlist"
+            return "/friend/getlist"
         case .createGroup:
-            return "/suser/private/group/creategroup"
+            return "/group/creategroup"
         case .searchGroup:
-            return "/suser/private/group/searchgroupbyname"
+            return "/group/searchgroupbyname"
         case .joinGroup:
-            return "/suser/private/group/applygroup"
+            return "/group/applyjoingroup"
+        case .approveJoinGroup:
+            return "/group/applyjoingroupcheck"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .login, .register, .userInfo, .approveFriend, .friendList, .createGroup, .searchGroup, .joinGroup:
+        case .login, .register,.addFriend, .approveFriend, .createGroup, .searchGroup, .joinGroup, .approveJoinGroup:
             return .post
-        case .getSessionID, .searchName, .addFriend:
+        case .userInfo, .getSessionID, .searchName, .friendList:
             return .get
         }
     }
@@ -68,9 +71,9 @@ extension UserApi: TargetType {
     }
     var task: Task {
         switch self {
-        case .login, .register, .approveFriend, .createGroup, .searchGroup, .joinGroup:
+        case .register, .login, .approveFriend, .createGroup, .searchGroup, .joinGroup, .approveJoinGroup:
             guard let parameters = parameters else {return .requestPlain}
-            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         case .userInfo, .getSessionID, .friendList:
             return .requestPlain
         case .searchName, .addFriend:
@@ -80,29 +83,33 @@ extension UserApi: TargetType {
     }
     
     var headers: [String : String]? {
-        return ["Content-type": "application/json"]
+        return ["Content-Type": "application/x-www-form-urlencoded"]
+//            return ["Content-Type": "application/json"]
+     
     }
     var parameters: [String : Any]? {
         let dic: [String: Any]?
         switch self {
         case .login(let userName, let psd):
             dic = ["email": userName, "pwd": psd]
-        case .register(let userName, let psd):
-            dic = ["name": userName, "pwd": psd, "email": userName, "age": 1, "sex": 1]
+        case .register(let userName, let pwd, let email, let age, let sex):
+            dic = ["name": userName, "pwd": pwd, "email": email, "age": age, "sex": sex]
         case .userInfo, .getSessionID, .friendList:
             dic = nil
-        case .searchName(let keyword):
-            dic = ["keyword": keyword, "page": 0, "size": 10]
+        case .searchName(let keyword, let page, let pagesize):
+            dic = ["keyword": keyword, "page": page, "size": pagesize]
         case .addFriend(let friendID, let msg):
             dic = ["id": friendID, "msg": msg]
-        case .approveFriend(let friendID):
-            dic = ["fid": friendID]
+        case .approveFriend(let friendID, let approved):
+            dic = ["fid": friendID, "confirm": approved ? 1 : 0]
         case .createGroup(let name, let remark):
             dic = ["name": name, "remark": remark]
-        case .searchGroup(let keyword):
-            dic = ["keyword": keyword, "page": 0, "size": 10]
-        case .joinGroup(let groupID, let msg):
-            dic = ["id": UserInfo.shared().userId, "gid": groupID, "msg": msg]
+        case .searchGroup(let keyword, let page, let pagesize):
+            dic = ["gname": keyword, "page": page, "size": pagesize]
+        case .joinGroup(let ownerID, let groupID, let msg):
+            dic = ["gownid": ownerID, "gid": groupID, "msg": msg]
+        case .approveJoinGroup(let messageID):
+            dic = ["msgid": messageID]
         }
         return dic
     }

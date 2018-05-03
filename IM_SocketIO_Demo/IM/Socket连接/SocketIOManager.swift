@@ -13,8 +13,7 @@ import SocketIO
 class SocketIOManager: NSObject {
     
     private static let sharedInstance = SocketIOManager()
-    
-    private var manager = SocketManager(socketURL: URL(string: "http://123.206.136.17:8080")!, config: [.log(true)])
+    private var manager: SocketManager?
      var socket: SocketIOClient!
     private let httpConnect = HttpConnect()
 //PUBLIC
@@ -22,14 +21,13 @@ class SocketIOManager: NSObject {
     public let contactManager = SocketContactManager()
     private override init() {
         super.init()
-        self.socket = manager.defaultSocket
-        self.handleServerEvents()
     }
     class func shared() -> SocketIOManager {
         return sharedInstance
     }
     func connect() {
        socket.connect()
+        
     }
     func disconnect() {
         socket.disconnect()
@@ -41,11 +39,6 @@ class SocketIOManager: NSObject {
     private func handleServerEvents() {
         socket.on(clientEvent: .connect) { (data, ack) in
             print("socket连上")
-            let emitType = SocketEmitType.auth
-            self.socket.emit(emitType.cmd, with: emitType.parameters)
-        }
-        socket.on("auth-s") { (data, ack) in
-            print("认证结果")
         }
         registerChatEvents()
         registerContactEvents()
@@ -71,12 +64,17 @@ class SocketIOManager: NSObject {
             function.handler(data, self.contactManager)
         }
     }
-    
+    private func initSocketManager(with sessionID: String, userID uid: Int) {
+        self.manager = SocketManager(socketURL: URL(string: "http://123.206.136.17:8111")!, config: [.log(true), .connectParams(["token": sessionID, "uid": uid]), .path("/websocket/")])//, .forceWebsockets(true)
+        self.socket = manager!.socket(forNamespace: "/")
+        self.handleServerEvents()
+        self.connect()
+    }
 }
 extension SocketIOManager {
     //注册
-    func register(with userName: String, password pwd: String, callBack: ResultHandler?) {
-        httpConnect.register(username: userName, pwd: pwd) { (error) in
+    func register(with userName: String, password pwd: String, email myEmail: String, age myAge: Int, sex mySex: Int,  callBack: ResultHandler?) {
+        httpConnect.register(username: userName, pwd: pwd, email: myEmail, age: myAge, sex: mySex) { (error) in
             callBack?(error)
         }
     }
@@ -87,7 +85,11 @@ extension SocketIOManager {
                 callBack?(error)
                 return
             }
-            self.socket.connect()
+            guard let session = UserInfo.shared().sessionID, UserInfo.shared().userId != -1 else {
+                callBack?(.unkownedError)
+                return
+            }
+            self.initSocketManager(with: session, userID: UserInfo.shared().userId)
             callBack?(error)
         }
     }

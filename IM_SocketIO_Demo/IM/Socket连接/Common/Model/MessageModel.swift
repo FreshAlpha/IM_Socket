@@ -9,19 +9,19 @@
 import UIKit
 import SwiftyJSON
 class MessageModel: NSObject {
-    let from: String
-    let to: String
+    let from: Int
+    let to: Int
     let identifier: String
     let msg: String
     let isSender: Bool //是否是发送的消息
     required init(with dicJson: JSON) {
-        from = dicJson["from"].stringValue
-        to = dicJson["to"].stringValue
+        from = dicJson["from"].intValue
+        to = dicJson["to"].intValue
         identifier = dicJson["id"].stringValue
         msg = dicJson["msg"].stringValue
         isSender = from == UserInfo.shared().userId
     }
-    required init(from: String, to: String, identifier: String, msg: String) {
+    required init(from: Int, to: Int, identifier: String, msg: String) {
         self.from = from
         self.to = to
         self.identifier = identifier
@@ -30,6 +30,6 @@ class MessageModel: NSObject {
         
     }
     func mapDic() -> [String: Any] {
-        return ["id": 0, "from": from, "to": to, "sendDate": 0, "msg": msg]
+        return ["id": 0, "to_uid": to, "msg": msg, "mtype": 1]
     }
 }

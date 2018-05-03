@@ -26,7 +26,7 @@ import SwiftyJSON
 
 
 class SocketMessage: NSObject {
-    var conversationID: String = ""
+    var conversationID: Int = -1
     var messageID: String = ""
     var direction: SocketMessageDirection {
         if from == UserInfo.shared().userId {
@@ -35,16 +35,16 @@ class SocketMessage: NSObject {
             return .receive
         }
     }
-    var from: String = ""
-    var to: String = ""
+    var from: Int = -1
+    var to: Int = -1
     var timestamp: Double = 0
     var chatType: ChatType = .chat
     var status: MessageStatus = .succeed
     var body: SocketMessageBody?
     convenience init(byFriendServer serverJson: JSON) {
         self.init()
-        from = serverJson["from"].stringValue
-        to = serverJson["to"].stringValue
+        from = serverJson["from_uid"].intValue
+        to = serverJson["to_uid"].intValue
         conversationID = from == UserInfo.shared().userId ? to : from
         messageID = serverJson["id"].stringValue
         timestamp = serverJson["sendDate"].doubleValue
@@ -55,8 +55,8 @@ class SocketMessage: NSObject {
    
     convenience init(byGroupServer serverJson: JSON) {
         self.init()
-        from = serverJson["from"].stringValue
-        to = serverJson["to"].stringValue
+        from = serverJson["from"].intValue
+        to = serverJson["to"].intValue
         conversationID = from == UserInfo.shared().userId ? to : from
         messageID = serverJson["id"].stringValue
         timestamp = serverJson["sendDate"].doubleValue

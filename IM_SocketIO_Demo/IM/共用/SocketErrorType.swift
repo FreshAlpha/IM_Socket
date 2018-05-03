@@ -33,6 +33,32 @@ extension SocketErrorType {
         switch self {
         case .unkownedError:
             return "服务器未知错误"
+        case .failure:
+            return "失败"
+        case .success:
+            return "成功"
+        case .accountNotExist:
+            return "用户不存在"
+        case .wrongPassword:
+            return "密码错误"
+        case .emailExist:
+            return "邮箱已存在"
+        case .verificationError:
+            return "验证码错误"
+        case .emilNotExist:
+            return "邮箱不存在"
+        case .notExist:
+            return "不存在"
+        case .dataIllegal:
+            return "数据格式非法"
+        case .securityLack:
+            return "安全验证失败"
+        case .haveAddFriend:
+            return "已添加好友"
+        case .largeFile:
+            return "文件过大"
+        case .haveJoinGroup:
+            return "已经添加该群"
         default:
             return ""
         }

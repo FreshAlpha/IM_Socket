@@ -18,7 +18,7 @@ class ChatCell: UITableViewCell {
         // Initialization code
     }
     func configureCell(with model: SocketMessage) {
-        nameLbl.text = model.from
+        nameLbl.text = "\(model.from)"
         if let body = model.body as? SocketTextBody {
             messageLbl.text = body.text
         }

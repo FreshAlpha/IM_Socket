@@ -15,7 +15,7 @@ class WeakChatDelegate: NSObject {
 }
 class SocketChatManager: NSObject {
     var weakDelegates = [WeakChatDelegate]() //外部调用方法的代理
-    var conversations = [String: SocketConversationModel]() //会话的字典（包括单聊和群组）
+    var conversations = [Int: SocketConversationModel]() //会话的字典（包括单聊和群组）
     public func addDelegate(_ delegate: SocketChatManagerDelegate) {
         weakDelegates.append(WeakChatDelegate(delegate: delegate))
     }
@@ -27,6 +27,7 @@ class SocketChatManager: NSObject {
         let emitType = SocketEmitType.sendMessage(message)
         self.emit(emitType)
     }
+    /*
     //发送服务端：获取离线消息
     public func fetchOfflineMsg() {
         let emitType = SocketEmitType.offlineMessage
@@ -46,9 +47,10 @@ class SocketChatManager: NSObject {
             self.emit(emitType)
         }
     }
+ */
 }
 extension SocketChatManager {
-    func getConversation(with conversationID: String) -> SocketConversationModel {
+    func getConversation(with conversationID: Int) -> SocketConversationModel {
         if  let conver: SocketConversationModel = self.conversations[conversationID] {
             return conver
         } else {

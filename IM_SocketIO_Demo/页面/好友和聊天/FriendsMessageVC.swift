@@ -27,12 +27,13 @@ class FriendsMessageVC: BaseViewController {
         self.addFriend()
     }
     func addFriend() {
-        let friendID: String
-        if let text = inputTF.text, text.count > 0 {
-            friendID = text
+        let friendID: Int
+        if let text = self.inputTF.text, let fid = Int(text) {
+          friendID = fid
         } else {
-            friendID = "5acdbddd15256f119f596567" //不填就加175账号
+            friendID = 8
         }
+       
         SocketIOManager.shared().contactManager.requestForAddingFriend(by: friendID, messsage: "hello, i'm from ios") { (contact, error) in
             guard case .success = error, let contact = contact else {return}
             self.handleNew(contact)
@@ -56,7 +57,7 @@ extension FriendsMessageVC: UITableViewDelegate, UITableViewDataSource {
         let addCell = tableView.dequeueReusableCell(withIdentifier: "AddFriendCell", for: indexPath) as! AddFriendCell
         let model = invationArray[indexPath.row]
         addCell.configureCell(with: model) {//同意添加
-            SocketIOManager.shared().contactManager.approveMakingFriend(by: model.from, completion: { (error) in
+            SocketIOManager.shared().contactManager.approveMakingFriend(by: model.from, isApproved: true, completion: { (error) in
                 guard case .success = error else {return}
                 model.contactType = .approveFriend
                 self.mainTable.reloadRows(at: [indexPath], with: .none)

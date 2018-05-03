@@ -12,7 +12,7 @@ class UserInfo: NSObject {
     var isLogin = false
     var name = ""
     var email = ""
-    var userId = ""
+    var userId = -1
     var sessionID: String?
     static let singleTon = UserInfo()
     private override init() {

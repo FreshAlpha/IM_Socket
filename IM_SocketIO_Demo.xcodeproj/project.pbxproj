@@ -29,6 +29,11 @@
 		213B98392093095A0099E6ED /* SocketConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B98382093095A0099E6ED /* SocketConversationModel.swift */; };
 		213B983B209317640099E6ED /* SocketMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B983A209317640099E6ED /* SocketMessage.swift */; };
 		213B983D20931C720099E6ED /* SocketMessageBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B983C20931C720099E6ED /* SocketMessageBody.swift */; };
+		213F0F3D2099544600B25DA2 /* GroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213F0F3C2099544600B25DA2 /* GroupModel.swift */; };
+		213F0F40209965CD00B25DA2 /* SocketGroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213F0F3F209965CD00B25DA2 /* SocketGroupManager.swift */; };
+		213F0F42209965F700B25DA2 /* SocketGroupManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213F0F41209965F700B25DA2 /* SocketGroupManagerDelegate.swift */; };
+		213F0F452099934400B25DA2 /* CreateGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213F0F432099934400B25DA2 /* CreateGroupVC.swift */; };
+		213F0F462099934400B25DA2 /* CreateGroupVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 213F0F442099934400B25DA2 /* CreateGroupVC.xib */; };
 		21446E6B208DD71E00004D6A /* AddFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21446E5F208DD71E00004D6A /* AddFriendCell.swift */; };
 		21446E6C208DD71E00004D6A /* AddFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21446E60208DD71E00004D6A /* AddFriendCell.xib */; };
 		21446E6D208DD71E00004D6A /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21446E61208DD71E00004D6A /* ChatCell.swift */; };
@@ -99,6 +104,11 @@
 		213B98382093095A0099E6ED /* SocketConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketConversationModel.swift; sourceTree = "<group>"; };
 		213B983A209317640099E6ED /* SocketMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketMessage.swift; sourceTree = "<group>"; };
 		213B983C20931C720099E6ED /* SocketMessageBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketMessageBody.swift; sourceTree = "<group>"; };
+		213F0F3C2099544600B25DA2 /* GroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupModel.swift; sourceTree = "<group>"; };
+		213F0F3F209965CD00B25DA2 /* SocketGroupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketGroupManager.swift; sourceTree = "<group>"; };
+		213F0F41209965F700B25DA2 /* SocketGroupManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketGroupManagerDelegate.swift; sourceTree = "<group>"; };
+		213F0F432099934400B25DA2 /* CreateGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupVC.swift; sourceTree = "<group>"; };
+		213F0F442099934400B25DA2 /* CreateGroupVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateGroupVC.xib; sourceTree = "<group>"; };
 		21446E5F208DD71E00004D6A /* AddFriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendCell.swift; sourceTree = "<group>"; };
 		21446E60208DD71E00004D6A /* AddFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendCell.xib; sourceTree = "<group>"; };
 		21446E61208DD71E00004D6A /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
@@ -180,6 +190,7 @@
 		213B980720919E450099E6ED /* Socket连接 */ = {
 			isa = PBXGroup;
 			children = (
+				213F0F3E2099658C00B25DA2 /* Group */,
 				213B980820919E450099E6ED /* Chat */,
 				213B980C20919E450099E6ED /* Common */,
 				213B981320919E450099E6ED /* Contact */,
@@ -215,6 +226,7 @@
 				213B980E20919E450099E6ED /* FriendModel.swift */,
 				213B980F20919E450099E6ED /* MessageModel.swift */,
 				213B98322091B77E0099E6ED /* ContactModel.swift */,
+				213F0F3C2099544600B25DA2 /* GroupModel.swift */,
 				213B98382093095A0099E6ED /* SocketConversationModel.swift */,
 				213B983A209317640099E6ED /* SocketMessage.swift */,
 				213B983C20931C720099E6ED /* SocketMessageBody.swift */,
@@ -253,6 +265,15 @@
 			path = "共用";
 			sourceTree = "<group>";
 		};
+		213F0F3E2099658C00B25DA2 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				213F0F3F209965CD00B25DA2 /* SocketGroupManager.swift */,
+				213F0F41209965F700B25DA2 /* SocketGroupManagerDelegate.swift */,
+			);
+			path = Group;
+			sourceTree = "<group>";
+		};
 		21446E5E208DD71E00004D6A /* 好友和聊天 */ = {
 			isa = PBXGroup;
 			children = (
@@ -268,6 +289,8 @@
 				21446E68208DD71E00004D6A /* FriendsMessageVC.xib */,
 				21446E69208DD71E00004D6A /* OtherChatCell.swift */,
 				21446E6A208DD71E00004D6A /* OtherChatCell.xib */,
+				213F0F432099934400B25DA2 /* CreateGroupVC.swift */,
+				213F0F442099934400B25DA2 /* CreateGroupVC.xib */,
 			);
 			path = "好友和聊天";
 			sourceTree = "<group>";
@@ -486,6 +509,7 @@
 				21446E72208DD71E00004D6A /* FriendsListVC.xib in Resources */,
 				2170EFD6207C9482009A890B /* Main.storyboard in Resources */,
 				21446E6C208DD71E00004D6A /* AddFriendCell.xib in Resources */,
+				213F0F462099934400B25DA2 /* CreateGroupVC.xib in Resources */,
 				21446E70208DD71E00004D6A /* ChatVC.xib in Resources */,
 				215718E52080A48A006F8ACD /* MenuViewController.xib in Resources */,
 			);
@@ -598,6 +622,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				213B982720919E450099E6ED /* SocketContactManager.swift in Sources */,
+				213F0F3D2099544600B25DA2 /* GroupModel.swift in Sources */,
 				213B982E20919E450099E6ED /* NetworkPlugin.swift in Sources */,
 				213B982120919E450099E6ED /* SocketChatManagerDelegate.swift in Sources */,
 				21446E75208DD71E00004D6A /* OtherChatCell.swift in Sources */,
@@ -612,10 +637,12 @@
 				213B982A20919E450099E6ED /* SocketBusinessManager.swift in Sources */,
 				213B983020919E450099E6ED /* UserNetwork.swift in Sources */,
 				21446E6F208DD71E00004D6A /* ChatVC.swift in Sources */,
+				213F0F40209965CD00B25DA2 /* SocketGroupManager.swift in Sources */,
 				213B982F20919E450099E6ED /* Response+UserNetwork.swift in Sources */,
 				213B983D20931C720099E6ED /* SocketMessageBody.swift in Sources */,
 				213B98332091B77E0099E6ED /* ContactModel.swift in Sources */,
 				2170EFD1207C9482009A890B /* AppDelegate.swift in Sources */,
+				213F0F42209965F700B25DA2 /* SocketGroupManagerDelegate.swift in Sources */,
 				213B98392093095A0099E6ED /* SocketConversationModel.swift in Sources */,
 				213B982D20919E450099E6ED /* HttpConnect.swift in Sources */,
 				21446E6B208DD71E00004D6A /* AddFriendCell.swift in Sources */,
@@ -626,6 +653,7 @@
 				213B982420919E450099E6ED /* SocketCommon.swift in Sources */,
 				213B982520919E450099E6ED /* SocketEmitType.swift in Sources */,
 				213B982320919E450099E6ED /* MessageModel.swift in Sources */,
+				213F0F452099934400B25DA2 /* CreateGroupVC.swift in Sources */,
 				215718E42080A48A006F8ACD /* MenuViewController.swift in Sources */,
 				213B982620919E450099E6ED /* SocketErrorType.swift in Sources */,
 				213B98352091F1550099E6ED /* SocketContactManager+ReceiveFunctions.swift in Sources */,

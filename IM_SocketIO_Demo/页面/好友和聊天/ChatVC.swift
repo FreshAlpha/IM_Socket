@@ -12,11 +12,11 @@ class ChatVC: BaseViewController {
     @IBOutlet weak var inputTF: UITextField!
     @IBOutlet weak var mainTable: UITableView!
     @IBOutlet weak var inputBottomConstaint: NSLayoutConstraint!
-    private let friendID: String
+    private let friendID: Int
     private let socketIOMgr = SocketIOManager.shared()
     private var chatArray = [SocketMessage]()
     private let conversation: SocketConversationModel
-    required init(with friendID: String) {
+    required init(with friendID: Int) {
         self.friendID = friendID
         self.conversation = socketIOMgr.chatManager.getConversation(with: friendID)
         super.init(nibName: "ChatVC", bundle: nil)
@@ -27,7 +27,7 @@ class ChatVC: BaseViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = friendID
+        self.title = "\(friendID)"
 //        self.chatArray = socketMgr.chatMessages(with: friendID)
         mainTable.register(UINib(nibName: "ChatCell", bundle: nil), forCellReuseIdentifier: "myChat")
         mainTable.register(UINib(nibName: "OtherChatCell", bundle: nil), forCellReuseIdentifier: "OtherChat")

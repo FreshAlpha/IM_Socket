@@ -9,18 +9,18 @@
 import UIKit
 import SwiftyJSON
 class ContactModel: NSObject {
-    var from: String = "" //朋友
-    var to: String = "" //我
+    var from: Int = -1 //朋友
+    var to: Int = -1 //我
     var msg: String = ""
     var contactType: ContactType = .nothing
     convenience init(bySocket json: JSON, contact contactType: ContactType) {
         self.init()
-        from = json["from"].stringValue
-        to = json["to"].stringValue
+        from = json["from_uid"].intValue
+        to = json["to_uid"].intValue
         msg = json["msg"].stringValue
         self.contactType = contactType
     }
-    convenience init(byHttp from: String, contact contactType: ContactType, message msg: String?) {
+    convenience init(byHttp from: Int, contact contactType: ContactType, message msg: String?) {
         self.init()
         self.from = from
         self.to = UserInfo.shared().userId

@@ -10,11 +10,13 @@ import UIKit
 import Moya
 class MenuViewController: BaseViewController {
     
+    @IBOutlet weak var myLabel: UILabel!
     @IBOutlet weak var friendsList: UIButton!
     private let socketMgr = SocketIOManager.shared()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "菜单"
+        myLabel.text = "\(UserInfo.shared().name)：\(UserInfo.shared().userId)"
         // Do any additional setup after loading the view.
         socketMgr.chatManager.addDelegate(self)
     }
@@ -27,7 +29,7 @@ class MenuViewController: BaseViewController {
     @IBAction func clickBtn(_ sender: UIButton) {
         switch sender.tag {
         case 1001:
-            socketMgr.chatManager.fetchOfflineMsg()
+            break
         case 1002:
             self.pushToFriendList()
         case 1003:

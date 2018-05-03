@@ -8,36 +8,40 @@
 
 import Foundation
 enum SocketEmitType {
-    case auth
     case sendMessage(MessageModel)
+    case sendGroupMessage(MessageModel)
+    /*
     case offlineMessage
     case friendHistoryMessage(String, Double?)
     case groupHistoryMessage(String, Double?)
-    
+    */
 }
 extension SocketEmitType {
     var cmd: String {
         switch self {
-        case .auth:
-            return "auth-c"
         case .sendMessage:
-            return "cfmsg"
+            return "f_msg"
+        case .sendGroupMessage:
+            return "g_msg"
+            /*
         case .offlineMessage:
             return "caoff"
         case .friendHistoryMessage, .groupHistoryMessage:
             return "chistory"
+ */
         }
     }
     var parameters: [Any] {
         switch self {
-        case .auth:
-            let dic = ["sessionid" : UserInfo.shared().sessionID]
-            return [dic]
         case .sendMessage(let message):
             let dic = message.mapDic()
             return [dic]
+        case .sendGroupMessage(let message):
+            let dic: [String : Any] = ["id": "", "to_gid": message.to, "msg": message.msg, "mtype": 1]
+            return [dic]
+            /*
         case .offlineMessage:
-            let dic = ["from" : UserInfo.shared().userId, "to": "server"]
+            let dic: [String: Any] = ["from" : UserInfo.shared().userId, "to": "server"]
             return [dic]
         case .friendHistoryMessage(let friendID, let timestamp):
             let date: Double
@@ -61,6 +65,7 @@ extension SocketEmitType {
             let dic: [String: Any] = ["to": groupID, "type": "group", "date": date]
             let finalDic = self.addCommonParameters(dic)
             return [finalDic]
+ */
         }
     }
     func addCommonParameters(_ dic: [String: Any])-> [String: Any] {

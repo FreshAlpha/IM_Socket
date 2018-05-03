@@ -26,7 +26,7 @@ class RegisterVC: BaseViewController {
             return
         }
         guard let psd = psdTF.text, let rePsd = psdReTF.text, psd == rePsd else {return}
-        SocketIOManager.shared().register(with: username, password: psd) { (error) in
+        SocketIOManager.shared().register(with: username, password: psd, email: username, age: 18, sex: 0) { (error) in
             guard case .success = error else {return}
             self.dismiss(animated: true, completion: nil)
         }

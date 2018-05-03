@@ -43,7 +43,7 @@ extension SocketChatManager {
         
     }
     //单聊互发消息
-    static let reveiveMessage = SocketReceiveFuntion<SocketChatManager>(cmd: "sfmsg") { (data, mgr) in
+    static let reveiveMessage = SocketReceiveFuntion<SocketChatManager>(cmd: "f_msg") { (data, mgr) in
         print("其他用户发到自己的信息,或者上次发送的消息的回执")
         guard let responseJson = JSON(data).array?.first else {return}
         let socketMessage = SocketMessage(byFriendServer: responseJson)
@@ -55,6 +55,3 @@ extension SocketChatManager {
     }
 }
 
-extension Array where Element == SocketConversationModel {
-    
-}
