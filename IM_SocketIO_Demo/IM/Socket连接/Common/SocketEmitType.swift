@@ -8,8 +8,8 @@
 
 import Foundation
 enum SocketEmitType {
-    case sendMessage(MessageModel)
-    case sendGroupMessage(MessageModel)
+    case sendMessage(SocketMessage)
+    case sendGroupMessage(SocketMessage)
     /*
     case offlineMessage
     case friendHistoryMessage(String, Double?)
@@ -33,11 +33,8 @@ extension SocketEmitType {
     }
     var parameters: [Any] {
         switch self {
-        case .sendMessage(let message):
-            let dic = message.mapDic()
-            return [dic]
-        case .sendGroupMessage(let message):
-            let dic: [String : Any] = ["id": "", "to_gid": message.to, "msg": message.msg, "mtype": 1]
+        case .sendMessage(let message), .sendGroupMessage(let message):
+            let dic = message.mapToDic()
             return [dic]
             /*
         case .offlineMessage:

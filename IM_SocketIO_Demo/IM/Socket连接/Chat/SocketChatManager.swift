@@ -23,7 +23,7 @@ class SocketChatManager: NSObject {
         SocketIOManager.shared().socket.emit(emitType.cmd, with: emitType.parameters)
     }
     //发消息
-    public func sendMessage(_ message: MessageModel) {
+    public func sendMessage(_ message: SocketMessage) {
         let emitType = SocketEmitType.sendMessage(message)
         self.emit(emitType)
     }

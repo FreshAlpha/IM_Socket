@@ -18,10 +18,13 @@ import UIKit
 }
 protocol SocketMessageBody: class {
     var bodyType: MessageBodyType {get}
+    func mapToDic() -> [String: Any]
 }
 
 
 class SocketTextBody: SocketMessageBody {
+    
+    
     var bodyType: MessageBodyType {
         return .text
     }
@@ -29,6 +32,10 @@ class SocketTextBody: SocketMessageBody {
     convenience init(with text: String) {
         self.init()
         self.text = text
+    }
+    func mapToDic() -> [String : Any] {
+        let dic: [String : Any] = ["mtype": self.bodyType.rawValue, "msg": self.text]
+        return dic
     }
     
 }

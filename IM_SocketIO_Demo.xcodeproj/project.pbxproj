@@ -11,13 +11,11 @@
 		213B982020919E450099E6ED /* SocketChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B980A20919E450099E6ED /* SocketChatManager.swift */; };
 		213B982120919E450099E6ED /* SocketChatManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B980B20919E450099E6ED /* SocketChatManagerDelegate.swift */; };
 		213B982220919E450099E6ED /* FriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B980E20919E450099E6ED /* FriendModel.swift */; };
-		213B982320919E450099E6ED /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B980F20919E450099E6ED /* MessageModel.swift */; };
 		213B982420919E450099E6ED /* SocketCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B981020919E450099E6ED /* SocketCommon.swift */; };
 		213B982520919E450099E6ED /* SocketEmitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B981120919E450099E6ED /* SocketEmitType.swift */; };
 		213B982620919E450099E6ED /* SocketErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B981220919E450099E6ED /* SocketErrorType.swift */; };
 		213B982720919E450099E6ED /* SocketContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B981420919E450099E6ED /* SocketContactManager.swift */; };
 		213B982820919E450099E6ED /* SocketContactManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B981520919E450099E6ED /* SocketContactManagerDelegate.swift */; };
-		213B982A20919E450099E6ED /* SocketBusinessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B981720919E450099E6ED /* SocketBusinessManager.swift */; };
 		213B982B20919E450099E6ED /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B981820919E450099E6ED /* SocketIOManager.swift */; };
 		213B982C20919E450099E6ED /* SocketMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B981920919E450099E6ED /* SocketMessageModel.swift */; };
 		213B982D20919E450099E6ED /* HttpConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213B981B20919E450099E6ED /* HttpConnect.swift */; };
@@ -86,13 +84,11 @@
 		213B980A20919E450099E6ED /* SocketChatManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketChatManager.swift; sourceTree = "<group>"; };
 		213B980B20919E450099E6ED /* SocketChatManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketChatManagerDelegate.swift; sourceTree = "<group>"; };
 		213B980E20919E450099E6ED /* FriendModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendModel.swift; sourceTree = "<group>"; };
-		213B980F20919E450099E6ED /* MessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		213B981020919E450099E6ED /* SocketCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketCommon.swift; sourceTree = "<group>"; };
 		213B981120919E450099E6ED /* SocketEmitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEmitType.swift; sourceTree = "<group>"; };
 		213B981220919E450099E6ED /* SocketErrorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketErrorType.swift; sourceTree = "<group>"; };
 		213B981420919E450099E6ED /* SocketContactManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketContactManager.swift; sourceTree = "<group>"; };
 		213B981520919E450099E6ED /* SocketContactManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketContactManagerDelegate.swift; sourceTree = "<group>"; };
-		213B981720919E450099E6ED /* SocketBusinessManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketBusinessManager.swift; sourceTree = "<group>"; };
 		213B981820919E450099E6ED /* SocketIOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		213B981920919E450099E6ED /* SocketMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketMessageModel.swift; sourceTree = "<group>"; };
 		213B981B20919E450099E6ED /* HttpConnect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpConnect.swift; sourceTree = "<group>"; };
@@ -194,7 +190,6 @@
 				213B980820919E450099E6ED /* Chat */,
 				213B980C20919E450099E6ED /* Common */,
 				213B981320919E450099E6ED /* Contact */,
-				213B981720919E450099E6ED /* SocketBusinessManager.swift */,
 				213B981820919E450099E6ED /* SocketIOManager.swift */,
 				213B981920919E450099E6ED /* SocketMessageModel.swift */,
 			);
@@ -224,7 +219,6 @@
 			isa = PBXGroup;
 			children = (
 				213B980E20919E450099E6ED /* FriendModel.swift */,
-				213B980F20919E450099E6ED /* MessageModel.swift */,
 				213B98322091B77E0099E6ED /* ContactModel.swift */,
 				213F0F3C2099544600B25DA2 /* GroupModel.swift */,
 				213B98382093095A0099E6ED /* SocketConversationModel.swift */,
@@ -634,7 +628,6 @@
 				213B982C20919E450099E6ED /* SocketMessageModel.swift in Sources */,
 				215718E22080A48A006F8ACD /* UserInfo.swift in Sources */,
 				21446E71208DD71E00004D6A /* FriendsListVC.swift in Sources */,
-				213B982A20919E450099E6ED /* SocketBusinessManager.swift in Sources */,
 				213B983020919E450099E6ED /* UserNetwork.swift in Sources */,
 				21446E6F208DD71E00004D6A /* ChatVC.swift in Sources */,
 				213F0F40209965CD00B25DA2 /* SocketGroupManager.swift in Sources */,
@@ -652,7 +645,6 @@
 				215718E32080A48A006F8ACD /* BaseViewController.swift in Sources */,
 				213B982420919E450099E6ED /* SocketCommon.swift in Sources */,
 				213B982520919E450099E6ED /* SocketEmitType.swift in Sources */,
-				213B982320919E450099E6ED /* MessageModel.swift in Sources */,
 				213F0F452099934400B25DA2 /* CreateGroupVC.swift in Sources */,
 				215718E42080A48A006F8ACD /* MenuViewController.swift in Sources */,
 				213B982620919E450099E6ED /* SocketErrorType.swift in Sources */,

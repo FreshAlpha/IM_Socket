@@ -54,7 +54,7 @@ class ChatVC: BaseViewController {
         guard let message = self.inputTF.text else {
             return
         }
-        let msgModel = MessageModel(from: UserInfo.shared().userId, to: friendID, identifier: "myInfo", msg: message)
+        let msgModel = SocketMessage(from: UserInfo.shared().userId, to: friendID, text: message)
         socketIOMgr.chatManager.sendMessage(msgModel)
         self.inputTF.text = nil
     }
