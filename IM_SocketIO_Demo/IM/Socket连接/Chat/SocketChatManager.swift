@@ -59,4 +59,18 @@ extension SocketChatManager {
             return conversation
         }
     }
+    //按照最新消息的日期排序
+    func getAllConversations() -> [SocketConversationModel] {
+        let list: [SocketConversationModel] =  self.conversations.values.sorted { (model0, model1) -> Bool in
+            switch (model0.getLeatestMessage(), model1.getLeatestMessage()) {
+            case let(m0?, m1?):
+                return m0.timestamp > m1.timestamp
+            case (.some, .none):
+                return true
+            default:
+                return false
+            }
+            }
+        return list
+    }
 }

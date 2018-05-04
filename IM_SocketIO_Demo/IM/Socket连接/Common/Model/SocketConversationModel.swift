@@ -10,11 +10,12 @@ import UIKit
 
 class SocketConversationModel: NSObject {
     let conversationID: Int //单聊就是朋友的userID，群组就是groupID
-    var messages = [SocketMessage]()
+    private var messages = [SocketMessage]()
     required init(_ conversationID: Int) {
         self.conversationID = conversationID
         super.init()
     }
+    
     func addMessage(_ message: SocketMessage) {
         self.messages.append(message)
         //TODO: -存到硬盘中
@@ -53,6 +54,12 @@ class SocketConversationModel: NSObject {
         }
         objc_sync_exit(self)
         aCompletion?(targetArray, targetArray.count == count ? .success : .noHistoryMessage)
+    }
+}
+extension SocketConversationModel {
+    //拿到当前会话的最新消息
+    func getLeatestMessage() -> SocketMessage? {
+        return self.messages.last?.copy() as? SocketMessage
     }
 }
 

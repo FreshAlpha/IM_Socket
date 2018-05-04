@@ -56,6 +56,10 @@
 		2170EFDB207C9484009A890B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2170EFD9207C9484009A890B /* LaunchScreen.storyboard */; };
 		2170EFE6207C9484009A890B /* IM_SocketIO_DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2170EFE5207C9484009A890B /* IM_SocketIO_DemoTests.swift */; };
 		2170EFF1207C9484009A890B /* IM_SocketIO_DemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2170EFF0207C9484009A890B /* IM_SocketIO_DemoUITests.swift */; };
+		21790A62209C5C5A003AC0D0 /* LatestChatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21790A60209C5C5A003AC0D0 /* LatestChatListVC.swift */; };
+		21790A63209C5C5A003AC0D0 /* LatestChatListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21790A61209C5C5A003AC0D0 /* LatestChatListVC.xib */; };
+		21790A66209C6B27003AC0D0 /* ConversationListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21790A64209C6B27003AC0D0 /* ConversationListCell.swift */; };
+		21790A67209C6B27003AC0D0 /* ConversationListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21790A65209C6B27003AC0D0 /* ConversationListCell.xib */; };
 		6299B16AA97B40131D3A9FEF /* Pods_IM_SocketIO_DemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A391E94D86459EB236CC96CC /* Pods_IM_SocketIO_DemoUITests.framework */; };
 		78F716887A899EB85BE8E512 /* Pods_IM_SocketIO_DemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEC3B4CA65E2C0AFBF40F6FB /* Pods_IM_SocketIO_DemoTests.framework */; };
 		A44E86A5FC2AE7745DE7EDF7 /* Pods_IM_SocketIO_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 535E7C8E8B1467C5874C23A7 /* Pods_IM_SocketIO_Demo.framework */; };
@@ -135,6 +139,10 @@
 		2170EFEC207C9484009A890B /* IM_SocketIO_DemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IM_SocketIO_DemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2170EFF0207C9484009A890B /* IM_SocketIO_DemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IM_SocketIO_DemoUITests.swift; sourceTree = "<group>"; };
 		2170EFF2207C9484009A890B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21790A60209C5C5A003AC0D0 /* LatestChatListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestChatListVC.swift; sourceTree = "<group>"; };
+		21790A61209C5C5A003AC0D0 /* LatestChatListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LatestChatListVC.xib; sourceTree = "<group>"; };
+		21790A64209C6B27003AC0D0 /* ConversationListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListCell.swift; sourceTree = "<group>"; };
+		21790A65209C6B27003AC0D0 /* ConversationListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationListCell.xib; sourceTree = "<group>"; };
 		41F83757D53A4CEAE402A556 /* Pods-IM_SocketIO_DemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IM_SocketIO_DemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IM_SocketIO_DemoTests/Pods-IM_SocketIO_DemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		535E7C8E8B1467C5874C23A7 /* Pods_IM_SocketIO_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IM_SocketIO_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6406989872543ABF3CD95CFA /* Pods-IM_SocketIO_DemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IM_SocketIO_DemoUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IM_SocketIO_DemoUITests/Pods-IM_SocketIO_DemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -299,6 +307,7 @@
 		215718D52080A48A006F8ACD /* 页面 */ = {
 			isa = PBXGroup;
 			children = (
+				21790A5F209C5C17003AC0D0 /* 最近联系 */,
 				21446E77208DD73F00004D6A /* 群组 */,
 				21446E5E208DD71E00004D6A /* 好友和聊天 */,
 				215718D62080A48A006F8ACD /* BaseViewController.swift */,
@@ -362,6 +371,17 @@
 				2170EFF2207C9484009A890B /* Info.plist */,
 			);
 			path = IM_SocketIO_DemoUITests;
+			sourceTree = "<group>";
+		};
+		21790A5F209C5C17003AC0D0 /* 最近联系 */ = {
+			isa = PBXGroup;
+			children = (
+				21790A60209C5C5A003AC0D0 /* LatestChatListVC.swift */,
+				21790A61209C5C5A003AC0D0 /* LatestChatListVC.xib */,
+				21790A64209C6B27003AC0D0 /* ConversationListCell.swift */,
+				21790A65209C6B27003AC0D0 /* ConversationListCell.xib */,
+			);
+			path = "最近联系";
 			sourceTree = "<group>";
 		};
 		7B9583CEE7B6469925B2A109 /* Pods */ = {
@@ -501,11 +521,13 @@
 				21446E74208DD71E00004D6A /* FriendsMessageVC.xib in Resources */,
 				21446E76208DD71E00004D6A /* OtherChatCell.xib in Resources */,
 				21446E72208DD71E00004D6A /* FriendsListVC.xib in Resources */,
+				21790A67209C6B27003AC0D0 /* ConversationListCell.xib in Resources */,
 				2170EFD6207C9482009A890B /* Main.storyboard in Resources */,
 				21446E6C208DD71E00004D6A /* AddFriendCell.xib in Resources */,
 				213F0F462099934400B25DA2 /* CreateGroupVC.xib in Resources */,
 				21446E70208DD71E00004D6A /* ChatVC.xib in Resources */,
 				215718E52080A48A006F8ACD /* MenuViewController.xib in Resources */,
+				21790A63209C5C5A003AC0D0 /* LatestChatListVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,6 +652,8 @@
 				21446E71208DD71E00004D6A /* FriendsListVC.swift in Sources */,
 				213B983020919E450099E6ED /* UserNetwork.swift in Sources */,
 				21446E6F208DD71E00004D6A /* ChatVC.swift in Sources */,
+				21790A62209C5C5A003AC0D0 /* LatestChatListVC.swift in Sources */,
+				21790A66209C6B27003AC0D0 /* ConversationListCell.swift in Sources */,
 				213F0F40209965CD00B25DA2 /* SocketGroupManager.swift in Sources */,
 				213B982F20919E450099E6ED /* Response+UserNetwork.swift in Sources */,
 				213B983D20931C720099E6ED /* SocketMessageBody.swift in Sources */,
